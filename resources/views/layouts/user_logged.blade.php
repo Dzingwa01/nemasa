@@ -28,7 +28,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand" href="/home" style="margin-left: 2em;">SMAT</a>
+        <a class="navbar-brand mx-auto" href="/home" style="margin-left: 2em;">SMAT</a>
 
     </nav>
 
@@ -144,7 +144,7 @@
 <script>
     $(document).ready(function(){
        $('#sidebarCollapse').on('click',function(){
-          $("#mySidenav").css('width','250px');
+          $("#mySidenav").css('width','300px');
        });
     });
     function closeNav() {

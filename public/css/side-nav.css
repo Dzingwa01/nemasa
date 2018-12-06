@@ -159,7 +159,7 @@
 @media (max-width: 767px) {
     .nav-side-menu {
         position: relative;
-        width: 100%;
+        width: 300px;
         margin-bottom: 10px;
     }
     .nav-side-menu .toggle-btn {
