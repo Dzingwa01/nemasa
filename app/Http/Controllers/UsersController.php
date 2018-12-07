@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
 use Illuminate\Http\Request;
-use DB;
-use Yajra\Datatables\Datatables;
 
-class ProjectController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,18 +16,8 @@ class ProjectController extends Controller
         //
     }
 
-    public function getProjects()
-    {
-        $projects = Project::join('users','users.id','projects.user_id')
-                ->select('projects.*','users.name as assigned_to')
-                ->get();
-        return Datatables::of($projects)->addColumn('action', function ($project) {
-            $re = 'project/' . $project->id;
-            $sh = 'project/show/' . $project->id;
-            $del = 'project/delete/' . $project->id;
-            return '<a href=' . $sh . '><i class="glyphicon glyphicon-eye-open" title="View Details" style="color:green"></i></a> <a href=' . $re . '><i class="glyphicon glyphicon-edit"></i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="glyphicon glyphicon-trash"></i></a>';
-        })
-            ->make(true);
+    public function getProfile(){
+
     }
 
     /**

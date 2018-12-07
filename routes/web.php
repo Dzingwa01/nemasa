@@ -19,5 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['web']], function () {
+    Route::get('user-profile','UsersController@getProfile');
     Route::get('get-projects','ProjectController@getProjects')->name('get-projects');
 });

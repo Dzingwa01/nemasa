@@ -1,119 +1,172 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'SMAT') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>SMAT</title>
+    <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {{--<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>--}}
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="/css/w3_nav_side.css" rel="stylesheet"/>
+    <!-- Compiled and minified JavaScript -->
+
 </head>
 <body>
-<div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
-        <a class="navbar-brand mx-auto" href="/home" style="margin-left: 2em;">SMAT</a>
-    </nav>
 
-    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
-        <button class="w3-bar-item w3-button w3-large"
-                onclick="w3_close()">Close &times;</button>
-        <div>
-            <div class="card hovercard" >
-
-                <div class="avatar">
-                    <img alt="" src="{{!is_null($user->profile_picture_url)?$user->profile_picture_url:'/images/profile_placeholder.jpg'}}"/>
-                </div>
-                <div class="info">
-                    <div class="title">
-                        <a style="color:white;">{{$user->name .' '.$user->surname}}</a>
-                    </div>
-                    <div class="desc">{{$user->job_title}}</div>
-
-                </div>
-
-            </div>
-        </div>
-        <div class="menu-list">
-            <ul id="menu-content" class="menu-content">
-                <li>
-                    <a href="/home">
-                        <i class="material-icons">home</i> Dashboard
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#"><i class="material-icons">assignment</i> Projects</a>
-                </li>
-
-
-                <li>
-                    <a href="#"><i class="material-icons">assessment</i> Reports</a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <i class="material-icons">verified_user</i> Profile
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <i class="material-icons">account_box</i>  Users
-                    </a>
-                </li>
+<div class="navbar-fixed">
+    <nav class="white" role="navigation" style="height: 5em;">
+        <div class="nav-wrapper">
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a id="logo-container" href="{{url('/home')}}" class="brand-logo center">SMAT
+            </a>
+            <ul class="right hide-on-med-and-down">
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Account<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
+
         </div>
-    </div>
-    <div id="main">
-    <div class="w3-container">
-        @yield('content')
-    </div>
-    </div>
+
+    </nav>
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="{{url('user-profile')}}">Profile</a></li>
+        <li><a style="color:black;" href="{{ url('/logout') }}" class=""
+               onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                Sign Out
+            </a></li>
+    </ul>
+    <ul id="slide-out" class="sidenav ">
+        <li><div class="user-view">
+                <a href="#user"><img class="circle" src="{{!is_null($user->profile_picture_url)?$user->profile_picture_url:'/images/profile_placeholder.jpg'}}"/></a>
+                <a href="#name"><span class="name" style="color:black;font-weight: bolder">{{$user->name . " ".$user->surname}}</span></a>
+                <a href="#email"><span class="email" style="color:black;font-weight: bolder">{{$user->job_title}}</span></a>
+            </div></li>
+        <div class="divider"></div>
+
+        <ul class="collapsible popout" style="margin-top:1em;" onclick="dashboard_show()">
+            <li>
+                <div class="collapsible-header" style="color:black;font-weight: bolder"> <i class="tiny material-icons">home</i><a href="/home" class="" style="color:black;"> Home</a>
+                </div>
+                <div class="collapsible-body" >
+                </div>
+            </li>
+        </ul>
+        {{--<ul class="collapsible popout" style="margin-top:1em;">--}}
+            {{--<li>--}}
+                {{--<div class="collapsible-header" style="color:black;font-weight: bolder"> <i class="tiny material-icons">assignment</i>--}}
+                    {{--Projects </div>--}}
+                {{--<div class="collapsible-body" >--}}
+                    {{--<ul>--}}
+                        {{--<li><a href="#" class="" style="color:black;font-weight: bolder;"><i class="tiny material-icons">redeem</i>Manage Projects</a></li>--}}
+                        {{--<li><a href="#" class="" style="color:black;font-weight: bolder;"><i class="tiny material-icons">queue</i>Completed Projects</a></li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
+        <ul class="collapsible popout" style="margin-top:1em;" onclick="reports_show()">
+            <li>
+                <div class="collapsible-header" style="color:black;font-weight: bolder"> <i class="tiny material-icons">assessment</i><a href="#!" class="" style="color:black;"> Reports</a>
+                </div>
+                <div class="collapsible-body" >
+                </div>
+            </li>
+        </ul>
+        <ul class="collapsible popout" style="margin-top:1em;">
+            <li>
+                <div class="collapsible-header" style="color:black;font-weight: bolder"> <i class="tiny material-icons">supervisor_account</i>
+                    Users </div>
+                <div class="collapsible-body" >
+                    <ul>
+                        <li><a style="color:black;font-weight: bolder" class="" href="#!"><i
+                                        class="tiny material-icons">account_circle</i>Manage Users</a></li>
+                        <li><a style="color:black;font-weight: bolder" class="" href="#!"><i
+                                        class="tiny material-icons">security</i>Roles</a></li>
+                        <li><a style="color:black;font-weight: bolder" class="" href="#!"><i
+                                        class="tiny material-icons">security</i>Permissions</a></li>
+
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="divider"></div>
+        <ul class="collapsible popout" style="margin-top:1em;">
+            <li>
+                <div class="collapsible-header" style="color:black;font-weight: bolder"> <i class="tiny material-icons">account_circle</i><a href="/user-profile" class="" style="color:black;"> Profile</a>
+                </div>
+                <div class="collapsible-body" >
+                </div>
+            </li>
+        </ul>
+        <ul class="collapsible popout" style="margin-top:1em;">
+            <li>
+                <div class="collapsible-header" style="color:black;font-weight: bolder">
+                    <a style="color:black;" href="{{ url('/logout') }}" class=""
+                       onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"><i
+                                class="tiny material-icons">vpn_key</i>
+                        Sign Out
+                    </a>
+                </div>
+                <div class="collapsible-body" >
+                </div>
+            </li>
+        </ul>
+
+    </ul>
 
 </div>
-<script>
-    function w3_open() {
-        let width = $(window).width();
-        if(width>768){
-            document.getElementById("main").style.marginLeft = "20%";
-            document.getElementById("mySidebar").style.width = "20%";
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("openNav").style.display = 'none';
-        }else{
-            document.getElementById("main").style.marginLeft = "50%";
-            document.getElementById("mySidebar").style.width = "50%";
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("openNav").style.display = 'none';
+<div class="container-fluid">
+    @yield('content')
+</div>
+
+</div>
+<style>
+    .sidenav-overlay {
+        z-index: 996;
+    }
+
+    @media only screen and (min-width: 993px) {
+        nav a.sidenav-trigger {
+            display: inline;
         }
+    }
+
+</style>
+<!--  Scripts-->
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        console.log("initializing");
+        $('input.autocomplete').autocomplete({
+            data: {
+                "Apple": null,
+                "Microsoft": null,
+                "Google": 'https://placehold.it/250x250'
+            },
+        });
+        M.AutoInit();
+        $(".dropdown-trigger").dropdown();
+    });
+    function dashboard_show(){
+
+        window.location.href = '/home';
+    }
+
+    function reports_show(){
 
     }
-    function w3_close() {
-        document.getElementById("main").style.marginLeft = "0%";
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("openNav").style.display = "inline-block";
-    }
-    window.onresize = function(event) {
-        w3_open();
-    };
-    function closeNav() {
-        $("#mySidenav").css('width','0px');
-    }
+
 </script>
 @stack('custom-scripts')
 </body>
