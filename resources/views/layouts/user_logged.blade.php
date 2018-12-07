@@ -8,12 +8,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {{--<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>--}}
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    {{--<link href="//cdn.datatables.net/responsive/2.2.3/css/dataTables.responsive.css" rel="stylesheet"/>--}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"/>
     <!-- Compiled and minified JavaScript -->
 
 </head>
@@ -42,9 +42,9 @@
     </ul>
     <ul id="slide-out" class="sidenav ">
         <li><div class="user-view">
-                <a href="#user"><img class="circle" src="{{!is_null($user->profile_picture_url)?$user->profile_picture_url:'/images/profile_placeholder.jpg'}}"/></a>
-                <a href="#name"><span class="name" style="color:black;font-weight: bolder">{{$user->name . " ".$user->surname}}</span></a>
-                <a href="#email"><span class="email" style="color:black;font-weight: bolder">{{$user->job_title}}</span></a>
+                <a href="#user"><img class="circle" src="{{!is_null(\Illuminate\Support\Facades\Auth::user()->profile_picture_url)?\Illuminate\Support\Facades\Auth::user()->profile_picture_url:'/images/profile_placeholder.jpg'}}"/></a>
+                <a href="#name"><span class="name" style="color:black;font-weight: bolder">{{\Illuminate\Support\Facades\Auth::user()->name . " ".\Illuminate\Support\Facades\Auth::user()->surname}}</span></a>
+                <a href="#email"><span class="email" style="color:black;font-weight: bolder">{{\Illuminate\Support\Facades\Auth::user()->job_title}}</span></a>
             </div></li>
         <div class="divider"></div>
 
@@ -82,7 +82,7 @@
                     Users </div>
                 <div class="collapsible-body" >
                     <ul>
-                        <li><a style="color:black;font-weight: bolder" class="" href="#!"><i
+                        <li><a style="color:black;font-weight: bolder" class="" href="{{url('users')}}"><i
                                         class="tiny material-icons">account_circle</i>Manage Users</a></li>
                         <li><a style="color:black;font-weight: bolder" class="" href="#!"><i
                                         class="tiny material-icons">security</i>Roles</a></li>
@@ -144,6 +144,12 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+{{--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">--}}
+{{--<script type="text/javascript" charset="utf8"--}}
+        {{--src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>--}}
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -157,9 +163,9 @@
         });
         M.AutoInit();
         $(".dropdown-trigger").dropdown();
+        $('select').formSelect();
     });
     function dashboard_show(){
-
         window.location.href = '/home';
     }
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class UsersController extends Controller
 {
@@ -14,12 +16,26 @@ class UsersController extends Controller
     public function index()
     {
         //
+
+//        $users = User::with('roles')->get()->toJson();
+//        dd($users);
+        return view('users.index');
     }
 
     public function getProfile(){
 
     }
 
+    public function getUsers(){
+        $users = User::with('roles')->get();
+        return Datatables::of($users)->addColumn('action', function ($user) {
+            $re = 'user/' . $user->id;
+            $sh = 'user/show/' . $user->id;
+            $del = 'user/delete/' . $user->id;
+            return '<a href=' . $sh . '><i class="glyphicon glyphicon-eye-open" title="View Details" style="color:green"></i></a> <a href=' . $re . '><i class="glyphicon glyphicon-edit"></i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="glyphicon glyphicon-trash"></i></a>';
+        })
+            ->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *

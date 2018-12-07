@@ -21,4 +21,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['web']], function () {
     Route::get('user-profile','UsersController@getProfile');
     Route::get('get-projects','ProjectController@getProjects')->name('get-projects');
+
+    /**
+     * Users Controller
+     */
+    Route::resource('users','UsersController');
+    Route::get('get-users','UsersController@getUsers')->name('get-users');
+    Route::get('users/delete','UsersController@destroy');
 });

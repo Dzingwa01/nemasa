@@ -5,7 +5,33 @@
  *
  * Made By MaterializeCSS.com
  */
+@media screen and (max-width: 640px){
 
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter{
+        text-align: left!important;
+    }
+
+    .dataTables_wrapper .dataTables_length{
+        float: left!important;
+
+    }
+    .dataTables_wrapper .dataTables_filter{
+        width: 160px!important;
+        float: right!important;
+
+    }
+}
+@media screen and (max-width: 640px) {
+    .dataTables_wrapper .dataTables_filter {
+        text-align: left !important;
+    }
+}
+#projects-table_length{
+    width: 60px!important;
+}
+#users-table_length{
+    width: 60px!important;
+}
 nav ul a,
 nav .brand-logo {
     color: black!important;
