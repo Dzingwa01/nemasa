@@ -68,7 +68,7 @@
 
                 <li>
                     <a href="#">
-                        <i class="material-icons">verified_user</i> Account Management
+                        <i class="material-icons">verified_user</i> Profile
                     </a>
                 </li>
 
@@ -115,5 +115,6 @@
         $("#mySidenav").css('width','0px');
     }
 </script>
+@stack('custom-scripts')
 </body>
 </html>
