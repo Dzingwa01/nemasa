@@ -26,6 +26,11 @@
         text-align: left !important;
     }
 }
+
+nav a{
+    color:black!important;
+}
+
 #projects-table_length{
     width: 60px!important;
 }
@@ -48,7 +53,7 @@ p {
 }
 
 .sidenav-trigger {
-    color: black;
+    color: black!important;
 }
 
 .parallax-container {

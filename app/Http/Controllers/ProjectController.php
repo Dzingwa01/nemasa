@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectStoreRequest;
 use App\Project;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 
 class ProjectController extends Controller
@@ -26,9 +28,9 @@ class ProjectController extends Controller
                 ->get();
         return Datatables::of($projects)->addColumn('action', function ($project) {
             $re = 'project/' . $project->id;
-            $sh = 'project/show/' . $project->id;
+            $sh = 'projects/' . $project->id;
             $del = 'project/delete/' . $project->id;
-            return '<a href=' . $sh . '><i class="glyphicon glyphicon-eye-open" title="View Details" style="color:green"></i></a> <a href=' . $re . '><i class="glyphicon glyphicon-edit"></i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="glyphicon glyphicon-trash"></i></a>';
+            return '<a href=' . $sh . '><i class="material-icons tiny" title="View Project Dashboard" style="color:green">visibility</i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="material-icons tiny">delete_forever</i></a>';
         })
             ->make(true);
     }
@@ -49,9 +51,22 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectStoreRequest $request)
     {
         //
+        $input = $request->validated();
+        DB::beginTransaction();
+//        dd("ola");
+        try{
+            $project = Project::create(['name'=>$input['name'],'location'=>$input['location'],'information'=>$input['information'],'start_date'=>$input['start_date'],'creator_id'=>Auth::user()->id,'user_id'=>$input['user_id']]);
+
+            DB::commit();
+            return response()->json(['project'=>$project,'message'=>'Project created successfully'],200);
+
+        }catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'Project could not be saved at the moment ' . $e->getMessage()], 400);
+        }
     }
 
     /**
@@ -60,9 +75,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
         //
+        return view('projects.project-dashboard',compact('project'));
     }
 
     /**
@@ -94,8 +110,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
         //
+        $project->delete();
+        return redirect('/home');
     }
 }

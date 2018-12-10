@@ -14,6 +14,7 @@
     {{--<link href="//cdn.datatables.net/responsive/2.2.3/css/dataTables.responsive.css" rel="stylesheet"/>--}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Compiled and minified JavaScript -->
 
 </head>
@@ -104,10 +105,10 @@
         </ul>
         <ul class="collapsible popout" style="margin-top:1em;">
             <li>
-                <div class="collapsible-header" style="color:black;font-weight: bolder">
+                <div class="collapsible-header" style="color:black;font-weight: bolder"   onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
                     <a style="color:black;" href="{{ url('/logout') }}" class=""
-                       onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();"><i
+                     ><i
                                 class="tiny material-icons">vpn_key</i>
                         Sign Out
                     </a>
@@ -118,7 +119,9 @@
         </ul>
 
     </ul>
-
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+    </form>
 </div>
 <div class="container-fluid">
     @yield('content')
@@ -134,6 +137,10 @@
         nav a.sidenav-trigger {
             display: inline;
         }
+    }
+    nav a{
+        color:black!important;
+        font-weight: bolder!important;
     }
 
 </style>
@@ -164,6 +171,11 @@
         M.AutoInit();
         $(".dropdown-trigger").dropdown();
         $('select').formSelect();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     });
     function dashboard_show(){
         window.location.href = '/home';

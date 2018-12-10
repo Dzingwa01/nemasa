@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -68,5 +69,12 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function verifyEmail(User $user){
+        $verification_time = Carbon::now();
+        $user->email_verified_at = $verification_time;
+        $user->save();
+        return view('account.activation-success',compact('user'));
     }
 }

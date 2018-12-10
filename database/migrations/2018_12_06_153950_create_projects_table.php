@@ -17,9 +17,11 @@ class CreateProjectsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('location');
+            $table->text('information');
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->string('user_id')->nullable();
+            $table->string('creator_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

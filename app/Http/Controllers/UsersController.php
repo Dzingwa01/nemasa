@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserStoreRequest;
+use App\Mail\InviteUser;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -17,9 +23,8 @@ class UsersController extends Controller
     {
         //
 
-//        $users = User::with('roles')->get()->toJson();
-//        dd($users);
-        return view('users.index');
+        $roles = Role::all();
+        return view('users.index',compact('roles'));
     }
 
     public function getProfile(){
@@ -29,10 +34,10 @@ class UsersController extends Controller
     public function getUsers(){
         $users = User::with('roles')->get();
         return Datatables::of($users)->addColumn('action', function ($user) {
-            $re = 'user/' . $user->id;
-            $sh = 'user/show/' . $user->id;
-            $del = 'user/delete/' . $user->id;
-            return '<a href=' . $sh . '><i class="glyphicon glyphicon-eye-open" title="View Details" style="color:green"></i></a> <a href=' . $re . '><i class="glyphicon glyphicon-edit"></i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="glyphicon glyphicon-trash"></i></a>';
+            $re = '/user/' . $user->id;
+            $sh = '/user/show/' . $user->id;
+            $del = '/user/delete/' . $user->id;
+            return '<a href=' . $sh . '><i class="material-icons tiny" title="View Details" style="color:green">visibility</i></a> <a href=' . $re . '><i class="material-icons tiny">create</i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="material-icons tiny">delete_forever</i></a>';
         })
             ->make(true);
     }
@@ -52,9 +57,26 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
         //
+        $input = $request->validated();
+        DB::beginTransaction();
+//        dd("ola");
+        try{
+            $user = User::create(['name'=>$input['name'],'surname'=>$input['surname'],'contact_number'=>$input['contact_number'],'email'=>$input['email'],'job_title'=>$input['job_title'],'password'=>Hash::make('secret')]);
+
+            $user->roles()->attach($input['role_id']);
+            $user = $user->load('roles');
+            $verification_url = url('account-completion/'.$user->id);
+            Mail::to($user)->send(new InviteUser($user,$verification_url));
+            DB::commit();
+            return response()->json(['user'=>$user,'message'=>'User created successfully and an email has been sent for account activation'],200);
+
+        }catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'User could not be saved at the moment ' . $e->getMessage()], 400);
+        }
     }
 
     /**
@@ -97,8 +119,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
+        $user->delete();
+        return redirect('users');
+
     }
 }

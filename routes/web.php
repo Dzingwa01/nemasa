@@ -20,12 +20,20 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['web']], function () {
     Route::get('user-profile','UsersController@getProfile');
+
+
+    /**
+     * Projects Controller
+     */
+    Route::resource('projects','ProjectController');
     Route::get('get-projects','ProjectController@getProjects')->name('get-projects');
+    Route::get('project/delete/{project}','ProjectController@destroy');
 
     /**
      * Users Controller
      */
     Route::resource('users','UsersController');
     Route::get('get-users','UsersController@getUsers')->name('get-users');
-    Route::get('users/delete','UsersController@destroy');
+    Route::get('/user/delete/{user}','UsersController@destroy');
+    Route::get('account-activation/{user}','RegisterController@verifyEmail');
 });
