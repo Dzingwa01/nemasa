@@ -1,12 +1,12 @@
 @extends('layouts.user_logged')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <h6 style="text-transform:uppercase;text-align: center;font-weight: bolder;margin-top:2em;">Users</h6>
             {{--<a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>--}}
         </div>
-        <div class="row">
+        <div class="row" style="margin-left: 2em;margin-right: 2em;">
             <div class="col s12">
                 <table class="table table-bordered" style="width: 100%!important;" id="users-table">
                     <thead>

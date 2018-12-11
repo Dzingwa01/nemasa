@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="margin-left: 2em;margin-right: 2em;">
             <h5 style="text-transform:uppercase;text-align: center;font-weight: bolder; margin-top:0.5em;">Project Local Procurement Plan</h5>
             <h6 style="text-transform:uppercase;text-align: center;font-weight: bolder;margin-top:1em;">Project
                 Dashboard:{{$project->name}}</h6>
-            <button class="btn waves-effect waves-light project-dashboard" style="margin-left:2em;"  name="">Back
+            <button class="btn waves-effect waves-light project-dashboard" style="margin-left:1.2em;"  name="">Back
                 <i class="material-icons left">arrow_back</i>
             </button>
         </div>
@@ -15,7 +15,7 @@
             <div class="col s12 m4">
                 <div class="card hoverable">
                     <div class="card-content white-text">
-                        <table class="responsive-table striped">
+                        <table class="striped">
                             <tbody>
                             <tr>
                                 <td>Client/Sponsor</td>
@@ -47,7 +47,7 @@
             <div class="col s12 m4">
                 <div class="card hoverable">
                     <div class="card-content white-text">
-                        <table class="responsive-table striped">
+                        <table class=" striped">
 
                             <tbody>
                             <tr>
@@ -84,7 +84,7 @@
             <div class="col s12 m4">
                 <div class="card hoverable">
                     <div class="card-content white-text">
-                        <table class="responsive-table striped">
+                        <table class=" striped">
 
                             <tbody>
                             <tr>
@@ -115,7 +115,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-left: 2em;margin-right: 2em;">
+        <div class="row" style="margin-left: 2em;margin-right: 2em;margin-bottom: 2em;">
             <div class="col s12">
                 <table class="table table-bordered" style="width: 100%!important;" id="packages-table">
                     <thead>
@@ -144,6 +144,7 @@
                     let project_id = {!! '"'. $project->id.'"' !!};
                     window.location.href = '/projects/'+project_id;
                 });
+                $('select[name="packages-table_length"]').css("display","inline");
             });
 
             function initialiseStepper(){

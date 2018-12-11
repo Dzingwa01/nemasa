@@ -66,5 +66,9 @@
 
         </div>
     </div>
-
+<style>
+    .card-content{
+        height: 120px!important;
+    }
+</style>
 @endsection
