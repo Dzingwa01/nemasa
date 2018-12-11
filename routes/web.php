@@ -42,4 +42,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('get-users','UsersController@getUsers')->name('get-users');
     Route::get('/user/delete/{user}','UsersController@destroy');
     Route::get('account-activation/{user}','RegisterController@verifyEmail');
+    Route::get('user-profile','UsersController@getUserProfile');
+
+    /**
+     * Roles Controller
+     */
+    Route::resource('roles','RolesController');
+    Route::get('get-roles','RolesController@getRoles')->name('get-roles');
+    Route::get('/roles/delete/{role}','RolesController@destroy');
 });

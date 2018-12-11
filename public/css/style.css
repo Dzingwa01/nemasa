@@ -54,12 +54,23 @@ td, th{
 nav a{
     color:black!important;
 }
-
+/*h6{*/
+    /*margin-top: 1em !important;*/
+/*}*/
 #projects-table_length{
     width: 60px!important;
 }
 #users-table_length{
     width: 60px!important;
+}
+#roles-table_length{
+    width: 60px!important;
+}
+#projects-table_length{
+    width:60px!important;
+}
+form{
+    margin-top:1.2em!important;
 }
 nav ul a,
 nav .brand-logo {

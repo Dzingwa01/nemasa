@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <h6 style="text-transform:uppercase;text-align: center;font-weight: bolder;margin-top:2em;">Project Dashboard:{{$project->name}}</h6>
+            <h5 style="text-transform:uppercase;text-align: center;font-weight: bolder;margin-top:2em;">Project Name:{{$project->name}}</h5>
         </div>
         <div class="row" style="margin-right: 2em;margin-left: 2em;">
             <div class="col s12 m4">

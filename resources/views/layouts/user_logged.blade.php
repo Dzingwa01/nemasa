@@ -86,10 +86,10 @@
                     <ul>
                         <li><a style="color:black;font-weight: bolder" class="" href="{{url('users')}}"><i
                                         class="tiny material-icons">account_circle</i>Manage Users</a></li>
-                        <li><a style="color:black;font-weight: bolder" class="" href="#!"><i
+                        <li><a style="color:black;font-weight: bolder" class="" href="{{url('roles')}}"><i
                                         class="tiny material-icons">security</i>Roles</a></li>
-                        <li><a style="color:black;font-weight: bolder" class="" href="#!"><i
-                                        class="tiny material-icons">security</i>Permissions</a></li>
+                        {{--<li><a style="color:black;font-weight: bolder" class="" href="#!"><i--}}
+                                        {{--class="tiny material-icons">security</i>Permissions</a></li>--}}
 
                     </ul>
                 </div>

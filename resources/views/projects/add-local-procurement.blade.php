@@ -5,7 +5,7 @@
         <div class="row">
             <h5 style="text-transform:uppercase;text-align: center;font-weight: bolder; margin-top:0.5em;">Local Procurement Plan</h5>
             <h6 style="text-transform:uppercase;text-align: center;font-weight: bolder;margin-top:1em;">Project
-                Dashboard:{{$project->name}}</h6>
+                Name:{{$project->name}}</h6>
         </div>
         {{--<div class="step-container_p" style="width: 650px; margin: 0 auto"></div>--}}
         <div class="row" style="margin-left: 2em;margin-right: 2em;">
@@ -17,9 +17,10 @@
                     {{--<li class="tab col s3"><a href="#test4">Socio Economic Allowables</a></li>--}}
                 </ul>
             </div>
-            <div id="test1"><h6 style="text-align: center;font-weight: bolder;">SME Package Information</h6>
+            <div id="test1">
                 <div class="row">
                     <form class="col s12">
+                        <h6 style="text-align: center;font-weight: bolder;">SME Package Information</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
@@ -60,9 +61,10 @@
                     </div>
                 </div>
             </div>
-            <div id="test2"><h6 style="text-align: center;font-weight: bolder;">SME Procurement Plan</h6>
+            <div id="test2">
                 <div class="row">
                     <form class="col s12">
+                        <h6 style="text-align: center;font-weight: bolder;">SME Procurement Plan</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
@@ -107,9 +109,10 @@
                     </div>
                 </div>
             </div>
-            <div id="test3" ><h6 style="text-align: center;font-weight: bolder;">SME Award Information</h6>
+            <div id="test3" >
                 <div class="row">
                     <form class="col m12">
+                        <h6 style="text-align: center;font-weight: bolder;">SME Award Information</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">

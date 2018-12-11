@@ -7,6 +7,7 @@ use App\Mail\InviteUser;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Yajra\Datatables\Datatables;
@@ -31,8 +32,10 @@ class UsersController extends Controller
         return view('users.index',compact('roles'));
     }
 
-    public function getProfile(){
+    public function getUserProfile(){
+        $user = Auth::user()->load('roles');
 
+        return view('users.profile',compact('user'));
     }
 
     public function getUsers(){
@@ -41,7 +44,7 @@ class UsersController extends Controller
             $re = '/user/' . $user->id;
             $sh = '/user/show/' . $user->id;
             $del = '/user/delete/' . $user->id;
-            return '<a href=' . $sh . '><i class="material-icons" title="View Details" style="color:green">visibility</i></a> <a href=' . $re . '><i class="material-icons">create</i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="material-icons">delete_forever</i></a>';
+            return '<a href=' . $re . ' title="Edit User"><i class="material-icons">create</i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="material-icons">delete_forever</i></a>';
         })
             ->make(true);
     }

@@ -5,7 +5,7 @@
         <div class="row" style="margin-left: 2em;margin-right: 2em;">
             <h5 style="text-transform:uppercase;text-align: center;font-weight: bolder; margin-top:0.5em;">Project Local Procurement Plan</h5>
             <h6 style="text-transform:uppercase;text-align: center;font-weight: bolder;margin-top:1em;">Project
-                Dashboard:{{$project->name}}</h6>
+                Name:{{$project->name}}</h6>
             <button class="btn waves-effect waves-light project-dashboard" style="margin-left:1.2em;"  name="">Back
                 <i class="material-icons left">arrow_back</i>
             </button>
@@ -72,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td>Required Spend %</td>
-                                <td></td>
+                                <td>30%</td>
                             </tr>
                             <tr></tr>
                             </tbody>

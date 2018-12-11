@@ -17,9 +17,10 @@
                     {{--<li class="tab col s3"><a href="#test4">Socio Economic Allowables</a></li>--}}
                 </ul>
             </div>
-            <div id="test1"><h6 style="text-align: center;font-weight: bolder;">SME Package Information</h6>
+            <div id="test1">
                 <div  style="margin-left: 2em;margin-right: 2em;">
                     <form class="col s12" >
+                        <h6 style="text-align: center;font-weight: bolder;">SME Package Information</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12 s12">
@@ -60,9 +61,10 @@
                     </div>
                 </div>
             </div>
-            <div id="test2"><h6 style="text-align: center;font-weight: bolder;">SME Procurement Plan</h6>
+            <div id="test2">
                 <div  style="margin-left: 2em;margin-right: 2em;">
                     <form class="col s12">
+                        <h6 style="text-align: center;font-weight: bolder;">SME Procurement Plan</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
@@ -110,6 +112,7 @@
             <div id="test3" ><h6 style="text-align: center;font-weight: bolder;">SME Award Information</h6>
                 <div style="margin-left: 2em;margin-right: 2em;">
                     <form class="col m12">
+                        <h6 style="text-align: center;font-weight: bolder;">SME Procurement Plan</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">

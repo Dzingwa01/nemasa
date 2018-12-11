@@ -6,21 +6,24 @@
             <h5 style="text-transform:uppercase;text-align: center;font-weight: bolder; margin-top:0.5em;">Contract Award
                 Calculation</h5>
             <h6 style="text-transform:uppercase;text-align: center;font-weight: bolder;margin-top:1em;">Project
-                Dashboard:{{$project->name}}</h6>
+                Name:{{$project->name}}</h6>
         </div>
         {{--<div class="step-container_p" style="width: 650px; margin: 0 auto"></div>--}}
         <div class="row card hoverable" style="margin-left: 2em;margin-right: 2em;">
-            <div class="col s12">
+            <div class="col s12" style="margin-top:1em;">
                 <ul class="tabs">
-                    <li class="tab col s3 active"><a href="#test1">Project Location</a></li>
-                    <li class="tab col s3"><a href="#test3">Project Information</a></li>
+                    <li class="tab col s2 active"><a href="#test1">Project Location</a></li>
+                    <li class="tab col s2"><a href="#test3">Project Information</a></li>
                     <li class="tab col s3"><a href="#test2">Contractor Information</a></li>
                     <li class="tab col s3"><a href="#test4">Socio Economic Allowables</a></li>
+                    <li class="tab col s2"><a href="#test5">Budget</a></li>
                 </ul>
             </div>
-            <div id="test1"><h6 style="text-align: center;font-weight: bolder;">Project Location</h6>
+            <div id="test1">
                 <div class="row">
+
                     <form class="col s12">
+                        <h6 style="text-align: center;font-weight: bolder;margin-top:0.5em!important;">Project Location</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
@@ -53,9 +56,10 @@
                     </div>
                 </div>
             </div>
-            <div id="test2"><h6 style="text-align: center;font-weight: bolder;">Contractor Information</h6>
+            <div id="test2">
                 <div class="row">
                     <form class="col s12">
+                        <h6 style="text-align: center;font-weight: bolder;">Contractor Information</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
@@ -98,9 +102,10 @@
                     </div>
                 </div>
             </div>
-            <div id="test3" ><h6 style="text-align: center;font-weight: bolder;">Project Information</h6>
+            <div id="test3" >
                 <div class="row">
                     <form class="col m12">
+                        <h6 style="text-align: center;font-weight: bolder;">Project Information</h6>
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
@@ -147,9 +152,10 @@
                     </div>
                 </div>
             </div>
-            <div id="test4"><h6 style="text-align: center;font-weight: bolder;">Socio Economic Allowables</h6>
+            <div id="test4">
             <div class="row">
                 <form class="col m12">
+                    <h6 style="text-align: center;font-weight: bolder;">Socio Economic Allowables</h6>
                     @csrf
                     <div class="row">
                         <div class="input-field col m6 s12">
@@ -211,33 +217,7 @@
                             <label for="sme_prelim_general_allowance">SME Preliminary & General Allocance (R)</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col m6 s12">
-                            <input id="work_budget" type="number" class="validate">
-                            <label for="work_budget">Work Budget (R)</label>
-                        </div>
-                        <div class="input-field col m6 s12">
-                            <input id="targeted_sme_participation_fee" type="number" class="validate">
-                            <label for="targeted_sme_participation_fee">Target SME Participation in %</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col m6 s12">
-                            <input id="sme_package_value_target" type="number" class="validate">
-                            <label for="sme_package_value_target">SME Package Value Target</label>
-                        </div>
-                        <div class="input-field col m6 s12">
-                            <input id="targeted_procument_value" type="number" class="validate">
-                            <label for="targeted_procument_value">targeted Procument Value (R)</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col m6 s12">
-                            <input id="local_procument_targeted_value" type="number" class="validate">
-                            <label for="local_procument_targeted_value">Local Procument Targeted Value</label>
-                        </div>
-                        
-                    </div>
+
 
                 </form>
                 <div class="row">
@@ -250,6 +230,51 @@
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+            <div id="test5">
+                    <form class="col s12">
+                        <h6 style="text-align: center;font-weight: bolder;">Budget</h6>
+                        @csrf
+                        <div class="row">
+                            <div class="input-field col m6 s12">
+                                <input id="work_budget" type="number" class="validate">
+                                <label for="work_budget">Work Budget (R)</label>
+                            </div>
+                            <div class="input-field col m6 s12">
+                                <input id="targeted_sme_participation_fee" type="number" class="validate">
+                                <label for="targeted_sme_participation_fee">Target SME Participation in %</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12">
+                                <input id="sme_package_value_target" type="number" class="validate">
+                                <label for="sme_package_value_target">SME Package Value Target</label>
+                            </div>
+                            <div class="input-field col m6 s12">
+                                <input id="targeted_procument_value" type="number" class="validate">
+                                <label for="targeted_procument_value">Targeted Procument Value (R)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12">
+                                <input id="local_procument_targeted_value" type="number" class="validate">
+                                <label for="local_procument_targeted_value">Local Procument Targeted Value</label>
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div style="float:right">
+                            <button class="btn waves-effect waves-light project-dashboard" style="margin-left:2em;"  name="">Back
+                                <i class="material-icons left">arrow_back</i>
+                            </button>
+                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-socios" name="action">Save
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+
             </div>
         </div>
     </div>
