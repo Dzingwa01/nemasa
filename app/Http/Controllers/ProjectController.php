@@ -16,6 +16,11 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -30,7 +35,7 @@ class ProjectController extends Controller
             $re = 'project/' . $project->id;
             $sh = 'projects/' . $project->id;
             $del = 'project/delete/' . $project->id;
-            return '<a href=' . $sh . '><i class="material-icons tiny" title="View Project Dashboard" style="color:green">visibility</i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="material-icons tiny">delete_forever</i></a>';
+            return '<a href=' . $sh . '><i class="material-icons " title="View Project Dashboard" style="color:green">visibility</i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="material-icons">delete_forever</i></a>';
         })
             ->make(true);
     }
@@ -45,6 +50,33 @@ class ProjectController extends Controller
         //
     }
 
+    public function getContractAwardCalc(Project $project){
+        return view('projects.contract-award-calculation',compact('project'));
+    }
+
+    public function getSMEProcurementPlan(Project $project){
+        return view('projects.sme-procurement-plan',compact('project'));
+    }
+
+    public function addLocalProcurementPlan(Project $project){
+        return view('projects.add-local-procurement',compact('project'));
+    }
+
+    public function getSpecialistProcurementPlan(Project $project){
+        return view('projects.specialist-procurement-plan',compact('project'));
+    }
+
+    public function getLocalProcurementPlan(Project $project){
+        return view('projects.local-procurement-plan',compact('project'));
+    }
+
+    public function addSMEProcurementPlan(Project $project){
+        return view('projects.add-sme-procurement',compact('project'));
+    }
+
+    public function addSpecialistProcurementPlan(Project $project){
+        return view('projects.add-specialist-procurement-plan',compact('project'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -56,7 +88,6 @@ class ProjectController extends Controller
         //
         $input = $request->validated();
         DB::beginTransaction();
-//        dd("ola");
         try{
             $project = Project::create(['name'=>$input['name'],'location'=>$input['location'],'information'=>$input['information'],'start_date'=>$input['start_date'],'creator_id'=>Auth::user()->id,'user_id'=>$input['user_id']]);
 

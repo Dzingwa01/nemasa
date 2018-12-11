@@ -7,13 +7,14 @@
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {{--<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>--}}
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     {{--<link href="//cdn.datatables.net/responsive/2.2.3/css/dataTables.responsive.css" rel="stylesheet"/>--}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"/>
+    <link href="/css/jquery-step-maker.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Compiled and minified JavaScript -->
 
@@ -157,7 +158,7 @@
         {{--src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>--}}
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
+<script src="/js/jquery-step-maker.js"></script>
 <script>
     $(document).ready(function () {
         console.log("initializing");
@@ -187,5 +188,6 @@
 
 </script>
 @stack('custom-scripts')
+@stack('custom-scripts-contract')
 </body>
 </html>

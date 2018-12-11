@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +27,6 @@ class UsersController extends Controller
     public function index()
     {
         //
-
         $roles = Role::all();
         return view('users.index',compact('roles'));
     }
@@ -37,7 +41,7 @@ class UsersController extends Controller
             $re = '/user/' . $user->id;
             $sh = '/user/show/' . $user->id;
             $del = '/user/delete/' . $user->id;
-            return '<a href=' . $sh . '><i class="material-icons tiny" title="View Details" style="color:green">visibility</i></a> <a href=' . $re . '><i class="material-icons tiny">create</i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="material-icons tiny">delete_forever</i></a>';
+            return '<a href=' . $sh . '><i class="material-icons" title="View Details" style="color:green">visibility</i></a> <a href=' . $re . '><i class="material-icons">create</i></a><a href=' . $del . ' title="Delete" style="color:red"><i class="material-icons">delete_forever</i></a>';
         })
             ->make(true);
     }
