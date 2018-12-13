@@ -22,7 +22,6 @@
             {{--{{dd($project)}}--}}
             <div id="test1">
                 <div class="row">
-
                     <form class="col s12">
                         <h6 style="text-align: center;font-weight: bolder;margin-top:0.5em!important;">Project Location</h6>
                         @csrf
@@ -49,7 +48,7 @@
                             <button class="btn waves-effect waves-light project-dashboard" style="margin-left:2em;"  name="">Back
                                 <i class="material-icons right">arrow_back</i>
                             </button>
-                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-socios" name="action">Update
+                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-location" name="action">Update
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -150,6 +149,7 @@
                             <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-project-information" name="action">Update
                                 <i class="material-icons right">send</i>
                             </button>
+
                         </div>
                     </div>
                 </div>
@@ -161,65 +161,64 @@
                     @csrf
                     <div class="row">
                         <div class="input-field col m6 s12">
-                            <input id="community_liason_officer_fee" type="number" class="validate">
+                            <input id="community_liason_officer_fee" value="{{!empty($project->socios[0])?$project->socios[0]->community_liason_officer_fee:''}}" type="number" class="validate">
                             <label for="community_liason_officer_fee">Community Liason Officer (R)</label>
                         </div>
                         <div class="input-field col m6 s12">
-                            <input id="interns_fee" type="number" class="validate" />
+                            <input id="interns_fee" type="number" value="{{!empty($project->socios[0])?$project->socios[0]->interns_fee:''}}"  class="validate" />
                             <label for="interns_fee">Interns (R)</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col m6 s12">
-                            <input id="graduates_fee" type="number" class="validate">
+                            <input id="graduates_fee" type="number" value="{{!empty($project->socios[0])?$project->socios[0]->graduates_fee:''}}"  class="validate">
                             <label for="graduates_fee">Graduates (R)</label>
                         </div>
                         <div class="input-field col m6 s12">
-                            <input id="psc_community_members" class="validate" type="number">
+                            <input id="psc_community_members" value="{{!empty($project->socios[0])?$project->socios[0]->psc_community_members:''}}"  class="validate" type="number">
                             <label for="psc_community_members">PSC Community Members (R)</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col m6 s12">
-                            <input id="employment_relations_coordinator" type="number" class="validate">
+                            <input id="employment_relations_coordinator" value="{{!empty($project->socios[0])?$project->socios[0]->employment_relations_coordinator:''}}"  type="number" class="validate">
                             <label for="employment_relations_coordinator">Employment Relations Coordinator (R)</label>
                         </div>
                         <div class="input-field col m6 s12">
-                            <input id="hiv_awareness" class="validate" type="number">
+                            <input id="hiv_awareness" class="validate" value="{{!empty($project->socios[0])?$project->socios[0]->hiv_awareness:''}}"  type="number">
                             <label for="hiv_awareness">HIV Awareness (R)</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col m6 s12">
-                            <input id="business_desk_support_fee" type="number" class="validate">
+                            <input id="business_desk_support_fee" value="{{!empty($project->socios[0])?$project->socios[0]->business_desk_support_fee:''}}"  type="number" class="validate">
                             <label for="business_desk_support_fee">Business Desk Support (R)</label>
                         </div>
                         <div class="input-field col m6 s12">
-                            <input id="sme_tender_manager_fee" class="validate" type="number">
+                            <input id="sme_tender_manager_fee" value="{{!empty($project->socios[0])?$project->socios[0]->sme_tender_manager_fee:''}}"  class="validate" type="number">
                             <label for="sme_tender_manager_fee">30% SME Tender Management (R)</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col m6 s12">
-                            <input id="local_procurement_management_fee" type="number" class="validate">
+                            <input id="local_procurement_management_fee" value="{{!empty($project->socios[0])?$project->socios[0]->local_procurement_management_fee:''}}"  type="number" class="validate">
                             <label for="local_procurement_management_fee">50% Local Procurement Management (R)</label>
                         </div>
                         <div class="input-field col m6 s12">
-                            <input id="contractor_attendance_profit" class="validate" type="number">
+                            <input id="contractor_attendance_profit" value="{{!empty($project->socios[0])?$project->socios[0]->contractor_attendance_profit:''}}"  class="validate" type="number">
                             <label for="contractor_attendance_profit">Contractor Attendance & Profit (R)</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col m6 s12">
-                            <input id="contractor_technical_mentor_fee" type="number" class="validate">
+                            <input id="contractor_technical_mentor_fee" value="{{!empty($project->socios[0])?$project->socios[0]->contractor_technical_mentor_fee:''}}"  type="number" class="validate">
                             <label for="contractor_technical_mentor_fee">Contractor Technical Mentor (R)</label>
                         </div>
                         <div class="input-field col m6 s12">
-                            <input id="sme_prelim_general_allowance" type="number" class="validate">
+                            <input id="sme_prelim_general_allowance" value="{{!empty($project->socios[0])?$project->socios[0]->sme_prelim_general_allowance:''}}"  type="number" class="validate">
                             <label for="sme_prelim_general_allowance">SME Preliminary & General Allocance (R)</label>
                         </div>
                     </div>
-
 
                 </form>
                 <div class="row">
@@ -228,6 +227,9 @@
                             <i class="material-icons left">arrow_back</i>
                         </button>
                         <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-socios" name="action">Save
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="update-socios" hidden name="action">Update
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -271,7 +273,7 @@
                             <button class="btn waves-effect waves-light project-dashboard" style="margin-left:2em;"  name="">Back
                                 <i class="material-icons left">arrow_back</i>
                             </button>
-                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-socios" name="action">Save
+                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-budget" >Save
                                 <i class="material-icons right">send</i>
                             </button>
 
@@ -292,6 +294,13 @@
                 }else{
                     $('#update-contractor').hide();
                     $('#save-contractor').show();
+                }
+                if(project.socios[0]){
+                    $('#update-socios').show();
+                    $('#save-socios').hide();
+                }else{
+                    $('#update-socios').hide();
+                    $('#save-socios').show();
                 }
                 console.log("Check project here",project);
 
@@ -323,10 +332,10 @@
                             $('#contractor_name').val(response.contractor.contractor_name);
                             $('#contact_person').val(response.contractor.contact_person);
                             $('#sme_manager_name').val(response.contractor.sme_manager_name);
-                            $('#landline').val(response.contractors.landline);
+                            $('#landline').val(response.contractor.landline);
                             $('#mobile').val(response.contractor.mobile);
                             $('#save-contractor').hide();
-                            $('#update-contractor').hide();
+                            $('#update-contractor').show();
                         },
                         error: function (response) {
                             console.log("error",response);
@@ -369,6 +378,8 @@
                                 $('#sme_manager_name').val(contractor.sme_manager_name);
                                 $('#landline').val(contractor.landline);
                                 $('#mobile').val(contractor.mobile);
+//                                $('#save-contractor').show();
+//                                $('#update-contractor').hide();
                             },
                             error: function (response) {
                                 console.log("error",response);
@@ -413,6 +424,127 @@
                             $('#preliminary_general').val(response.project.preliminary_general);
                             $('#contigency_allowable').val(response.project.contigency_allowable);
                             $('#socio_economic_allowables').val(response.project.socio_economic_allowables);
+//                            $('#save-project-information').hide();
+//                            $('#update-project-information').show();
+                        },
+                        error: function (response) {
+                            console.log("error",response);
+                            let message = response.message;
+                            let errors = response.errors;
+                            for (var error in   errors) {
+                                console.log("error",error)
+                                if( errors.hasOwnProperty(error) ) {
+                                    message += errors[error] + "\n";
+                                }
+                            }
+                            alert(message);
+                            $("#modal1").close();
+                        }
+                    });
+                });
+
+                $('#save-socios').on('click',function(){
+                    let project_id = {!! '"'. $project->id.'"' !!};
+                    console.log("Check here",project);
+                    let formData = new FormData();
+                    formData.append('community_liason_officer_fee', $('#community_liason_officer_fee').val());
+                    formData.append('interns_fee', $('#interns_fee').val());
+                    formData.append('graduates_fee', $('#graduates_fee').val());
+                    formData.append('psc_community_members', $('#psc_community_members').val());
+                    formData.append('employment_relations_coordinator', $('#employment_relations_coordinator').val());
+
+                    formData.append('hiv_awareness', $('#hiv_awareness').val());
+                    formData.append('business_desk_support_fee', $('#business_desk_support_fee').val());
+                    formData.append('sme_tender_manager_fee', $('#sme_tender_manager_fee').val());
+                    formData.append('local_procurement_management_fee', $('#local_procurement_management_fee').val());
+                    formData.append('contractor_attendance_profit', $('#contractor_attendance_profit').val());
+                    formData.append('contractor_technical_mentor_fee', $('#contractor_technical_mentor_fee').val());
+                    formData.append('sme_prelim_general_allowance', $('#sme_prelim_general_allowance').val());
+                    formData.append('project_id', project_id);
+
+                    console.log("socios ", formData);
+                    $.ajax({
+                        url: "{{ route('socios.store') }}",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        type: 'post',
+
+                        success: function (response, a, b) {
+                            console.log("success",response);
+                            alert(response.message);
+                            $('#community_liason_officer_fee').val(response.socio.community_liason_officer_fee);
+                            $('#interns_fee').val(response.socio.interns_fee);
+                            $('#graduates_fee').val(response.socio.graduates_fee);
+                            $('#psc_community_members').val(response.socio.psc_community_members);
+                            $('#employment_relations_coordinator').val(response.socio.employment_relations_coordinator);
+
+                            $('#hiv_awareness').val(response.socio.community_liason_officer_fee);
+                            $('#business_desk_support_fee').val(response.socio.business_desk_support_fee);
+                            $('#sme_tender_manager_fee').val(response.socio.sme_tender_manager_fee);
+                            $('#local_procurement_management_fee').val(response.socio.local_procurement_management_fee);
+                            $('#contractor_attendance_profit').val(response.socio.contractor_attendance_profit);
+                            $('#sme_prelim_general_allowance').val(response.socio.sme_prelim_general_allowance);
+                            $('#save-socios').hide();
+                            $('#update-socios').show();
+                        },
+                        error: function (response) {
+                            console.log("error",response);
+                            let message = response.message;
+                            let errors = response.errors;
+                            for (var error in   errors) {
+                                console.log("error",error)
+                                if( errors.hasOwnProperty(error) ) {
+                                    message += errors[error] + "\n";
+                                }
+                            }
+                            alert(message);
+                            $("#modal1").close();
+                        }
+                    });
+                });
+                $('#update-socios').on('click',function(){
+                    let project_id = {!! '"'. $project->id.'"' !!};
+                    let formData = new FormData();
+                    formData.append('community_liason_officer_fee', $('#community_liason_officer_fee').val());
+                    formData.append('interns_fee', $('#interns_fee').val());
+                    formData.append('graduates_fee', $('#graduates_fee').val());
+                    formData.append('psc_community_members', $('#psc_community_members').val());
+                    formData.append('employment_relations_coordinator', $('#employment_relations_coordinator').val());
+
+                    formData.append('hiv_awareness', $('#hiv_awareness').val());
+                    formData.append('business_desk_support_fee', $('#business_desk_support_fee').val());
+                    formData.append('sme_tender_manager_fee', $('#sme_tender_manager_fee').val());
+                    formData.append('local_procurement_management_fee', $('#local_procurement_management_fee').val());
+                    formData.append('contractor_attendance_profit', $('#contractor_attendance_profit').val());
+                    formData.append('contractor_technical_mentor_fee', $('#contractor_technical_mentor_fee').val());
+                    formData.append('sme_prelim_general_allowance', $('#sme_prelim_general_allowance').val());
+                    let url = '/socios/update-details/'+project.socios[0].id;
+                    console.log("socios ", formData);
+                    $.ajax({
+                        url: url,
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        type: 'post',
+
+                        success: function (response, a, b) {
+                            console.log("success",response);
+                            alert(response.message);
+                            $('#community_liason_officer_fee').val(response.socio.community_liason_officer_fee);
+                            $('#interns_fee').val(response.socio.interns_fee);
+                            $('#graduates_fee').val(response.socio.graduates_fee);
+                            $('#psc_community_members').val(response.socio.psc_community_members);
+                            $('#employment_relations_coordinator').val(response.socio.employment_relations_coordinator);
+
+                            $('#hiv_awareness').val(response.socio.community_liason_officer_fee);
+                            $('#business_desk_support_fee').val(response.socio.business_desk_support_fee);
+                            $('#sme_tender_manager_fee').val(response.socio.sme_tender_manager_fee);
+                            $('#local_procurement_management_fee').val(response.socio.local_procurement_management_fee);
+                            $('#contractor_attendance_profit').val(response.socio.contractor_attendance_profit);
+                            $('#sme_prelim_general_allowance').val(response.socio.sme_prelim_general_allowance);
+//                            $('#save-socios').show();
+//                            $('#update-socios').hide();
                         },
                         error: function (response) {
                             console.log("error",response);

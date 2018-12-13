@@ -12,4 +12,8 @@ class Project extends BaseModel
      public function contractors(){
         return $this->hasMany(Contractor::class);
      }
+
+     public function socios(){
+         return $this->hasMany(SocioEconomicAllowable::class);
+     }
 }

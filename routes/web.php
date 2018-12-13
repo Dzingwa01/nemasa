@@ -21,7 +21,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['web']], function () {
     Route::get('user-profile','UsersController@getProfile');
 
+    /**
+     * Socio Economic Allowables Controoler
+     */
 
+    Route::resource('socios','SocioEconominAllowableController');
+    Route::post('socios/update-details/{socio}','SocioEconominAllowableController@update');
     /**
      * Projects Controller
      */

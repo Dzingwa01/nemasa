@@ -51,8 +51,8 @@ class ProjectController extends Controller
     }
 
     public function getContractAwardCalc(Project $project){
-        $project->load('contractors');
-
+        $project->load('contractors','socios');
+//        dd($project);
         return view('projects.contract-award-calculation',compact('project'));
     }
 
