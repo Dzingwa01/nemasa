@@ -16,10 +16,10 @@ class ModifyProjectsTable extends Migration
         Schema::table('projects', function (Blueprint $table) {
             //
             $table->text('scope_of_work')->nullable();
-            $table->decimal('contract_sum_excl')->nullable();
-            $table->decimal('preliminary_general')->nullable();
-            $table->decimal('contigency_allowable')->nullable();
-            $table->decimal('socio_economic_allowables')->nullable();
+            $table->decimal('contract_sum_excl',15,2)->nullable();
+            $table->decimal('preliminary_general',15,2)->nullable();
+            $table->decimal('contigency_allowable',15,2)->nullable();
+            $table->decimal('socio_economic_allowables',15,3)->nullable();
         });
     }
 

@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web']], function () {
      * Projects Controller
      */
     Route::resource('projects','ProjectController');
-    Route::post('projects/update/{project}','ProjectsController@update');
+    Route::post('projects/update/{project}','ProjectController@update');
     Route::get('get-projects','ProjectController@getProjects')->name('get-projects');
     Route::get('project/delete/{project}','ProjectController@destroy');
     Route::get('contract-award-calculator/{project}','ProjectController@getContractAwardCalc');

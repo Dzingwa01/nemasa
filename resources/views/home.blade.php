@@ -64,8 +64,6 @@
                                 <input id="start_date" type="date" class="validate">
                                 <label for="start_date">Start Date</label>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="input-field col m6">
                                 <select id="user_id">
                                     @foreach($users as $user)
@@ -75,6 +73,7 @@
                                 <label>Assign to</label>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
