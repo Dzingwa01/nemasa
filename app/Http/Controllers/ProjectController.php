@@ -57,27 +57,32 @@ class ProjectController extends Controller
     }
 
     public function getSMEProcurementPlan(Project $project){
+        $project->load('contractors','sme_procs');
         return view('projects.sme-procurement-plan',compact('project'));
     }
 
     public function addLocalProcurementPlan(Project $project){
+        $project->load('contractors','socios');
         return view('projects.add-local-procurement',compact('project'));
     }
 
     public function getSpecialistProcurementPlan(Project $project){
+        $project->load('contractors','socios');
         return view('projects.specialist-procurement-plan',compact('project'));
     }
 
     public function getLocalProcurementPlan(Project $project){
+        $project->load('contractors','socios');
         return view('projects.local-procurement-plan',compact('project'));
     }
 
     public function addSMEProcurementPlan(Project $project){
-
+        $project->load('contractors','socios');
         return view('projects.add-sme-procurement',compact('project'));
     }
 
     public function addSpecialistProcurementPlan(Project $project){
+        $project->load('contractors','socios');
         return view('projects.add-specialist-procurement-plan',compact('project'));
     }
     /**

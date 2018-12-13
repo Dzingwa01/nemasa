@@ -18,4 +18,7 @@ class Project extends BaseModel
      public function socios(){
          return $this->hasMany(SocioEconomicAllowable::class);
      }
+    public function sme_procs(){
+        return $this->hasMany(SMEProcurementPlan::class);
+    }
 }

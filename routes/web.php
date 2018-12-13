@@ -27,6 +27,13 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::resource('socios','SocioEconominAllowableController');
     Route::post('socios/update-details/{socio}','SocioEconominAllowableController@update');
+
+    /**
+     * SMEProcurementPlanController
+     */
+    Route::resource('sme-proc','SMEProcurementPlanController');
+    Route::post('sme-proc/update-details/{sme_proc}','SMEProcurementPlanController@update');
+
     /**
      * Projects Controller
      */

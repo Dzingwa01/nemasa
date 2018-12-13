@@ -23,11 +23,11 @@
                                 </tr>
                                 <tr>
                                     <td>Project /Facility Name</td>
-                                    <td></td>
+                                    <td>{{$project->name}}</td>
                                 </tr>
                                 <tr>
                                     <td>Main Contractor Name</td>
-                                    <td></td>
+                                    <td>{{$project->contractors[0]->contractor_name}}</td>
                                 </tr>
                                 <tr>
                                     <td>Present Contract Value</td>
@@ -35,7 +35,7 @@
                                 </tr>
                                 <tr>
                                     <td>Works Excl Contigencies & Socio</td>
-                                    <td></td>
+                                    <td>{{'R '.$project->contract_sum_excl}}</td>
                                 </tr>
                                 <tr><td></td><td></td></tr>
                                 </tbody>
@@ -60,7 +60,7 @@
                                 </tr>
                                 <tr>
                                     <td>Contigency</td>
-                                    <td></td>
+                                    <td>{{'R '.$project->contigency_allowable}}</td>
                                 </tr>
                                 <tr>
                                     <td>Contract Value</td>
