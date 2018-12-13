@@ -140,11 +140,11 @@ class ProjectController extends Controller
         try{
             $project->update($request->all());
             DB::commit();
-            return response()->json(['project'=>$project,'message'=>'Project updated successfully'],200);
+            return response()->json(['project'=>$project->load('contractors','socios'),'message'=>'Project information updated successfully'],200);
 
         }catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Project could not be updated at the moment ' . $e->getMessage()], 400);
+            return response()->json(['message' => 'Project information could not be updated at the moment ' . $e->getMessage()], 400);
         }
     }
 

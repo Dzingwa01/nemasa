@@ -242,27 +242,27 @@
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="work_budget" type="number" class="validate">
+                                <input id="work_budget" type="number" value="{{$project->work_budget}}" class="validate">
                                 <label for="work_budget">Work Budget (R)</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="targeted_sme_participation_fee" type="number" class="validate">
+                                <input id="targeted_sme_participation_fee" value="{{$project->targeted_sme_participation_fee}}" type="number" class="validate">
                                 <label for="targeted_sme_participation_fee">Target SME Participation in %</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="sme_package_value_target" type="number" class="validate">
+                                <input id="sme_package_value_target" type="number" value="{{$project->sme_package_value_target}}" class="validate">
                                 <label for="sme_package_value_target">SME Package Value Target</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="targeted_procument_value" type="number" class="validate">
+                                <input id="targeted_procument_value" type="number" value="{{$project->targeted_procument_value}}" class="validate">
                                 <label for="targeted_procument_value">Targeted Procument Value (R)</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="local_procument_targeted_value" type="number" class="validate">
+                                <input id="local_procument_targeted_value" type="number" value="{{$project->local_procument_targeted_value}}" class="validate">
                                 <label for="local_procument_targeted_value">Local Procument Targeted Value</label>
                             </div>
 
@@ -557,7 +557,50 @@
                                 }
                             }
                             alert(message);
-                            $("#modal1").close();
+//                            $("#modal1").close();
+                        }
+                    });
+                });
+                $('#save-budget').on('click',function(){
+                    let project_id = {!! '"'. $project->id.'"' !!};
+                    let formData = new FormData();
+                    formData.append('work_budget', $('#work_budget').val());
+                    formData.append('targeted_sme_participation_fee', $('#targeted_sme_participation_fee').val());
+                    formData.append('sme_package_value_target', $('#sme_package_value_target').val());
+                    formData.append('targeted_procument_value', $('#targeted_procument_value').val());
+                    formData.append('local_procument_targeted_value', $('#local_procument_targeted_value').val());
+
+                    console.log("project ", formData);
+                    $.ajax({
+                        url: "{{ url('projects/update/'.$project->id) }}",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        type: 'post',
+
+                        success: function (response, a, b) {
+                            console.log("success",response);
+                            alert(response.message);
+                            $('#work_budget').val(response.project.work_budget);
+                            $('#targeted_sme_participation_fee').val(response.project.targeted_sme_participation_fee);
+                            $('#sme_package_value_target').val(response.project.contract_sum_excl);
+                            $('#targeted_procument_value').val(response.project.preliminary_general);
+                            $('#local_procument_targeted_value').val(response.project.contigency_allowable);
+//                            $('#save-project-information').hide();
+//                            $('#update-project-information').show();
+                        },
+                        error: function (response) {
+                            console.log("error",response);
+                            let message = response.message;
+                            let errors = response.errors;
+                            for (var error in   errors) {
+                                console.log("error",error)
+                                if( errors.hasOwnProperty(error) ) {
+                                    message += errors[error] + "\n";
+                                }
+                            }
+                            alert(message);
+//                            $("#modal1").close();
                         }
                     });
                 });
