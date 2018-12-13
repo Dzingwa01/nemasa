@@ -12,9 +12,12 @@
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Location</th>
-                    <th>Information</th>
-                    <th>Date</th>
+                    <th>Ward</th>
+                    <th>Municipality</th>
+                    <th>District</th>
+                    <th>Start Date</th>
+                    <th>Contractor Name</th>
+                    <th>Contact Person</th>
                     <th>Assigned To</th>
                     <th>Actions</th>
                 </tr>
@@ -42,15 +45,21 @@
                                 <label for="name">Name</label>
                             </div>
                             <div class="input-field col m6">
-                                <input id="location" type="text" class="validate">
-                                <label for="location">Location</label>
+                                <input id="ward" type="text" class="validate">
+                                <label for="ward">Ward</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m6">
-                                <textarea id="information" type="text" class="materialize-textarea"></textarea>
-                                <label for="information">Information</label>
+                                <input id="municipality" type="text" class="validate">
+                                <label for="municipality">Municipality</label>
                             </div>
+                            <div class="input-field col m6">
+                                <input id="district" type="text" class="validate">
+                                <label for="district">District</label>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="input-field col m6">
                                 <input id="start_date" type="date" class="validate">
                                 <label for="start_date">Start Date</label>
@@ -92,9 +101,12 @@
                         ajax: '{{route('get-projects')}}',
                         columns: [
                             {data: 'name', name: 'name'},
-                            {data: 'location', name: 'location'},
-                            {data: 'information', name: 'information'},
+                            {data: 'ward', name: 'ward'},
+                            {data: 'local_municipality', name: 'local_municipality'},
+                            {data: 'district', name: 'district'},
                             {data: 'start_date', name: 'start_date'},
+                            {data:'contractors[0].contractor_name',name:'contractors[0].contractor_name'},
+                            {data:'contractors[0].contact_person',name:'contractors[0].contact_person'},
                             {data: 'assigned_to', name: 'assigned_to'},
                             {data: 'action', name: 'action', orderable: false, searchable: false}
                         ]
@@ -104,8 +116,9 @@
                 $('#save-project').on('click',function(){
                     let formData = new FormData();
                     formData.append('name', $('#name').val());
-                    formData.append('location', $('#location').val());
-                    formData.append('information', $('#information').val());
+                    formData.append('district', $('#district').val());
+                    formData.append('ward', $('#ward').val());
+                    formData.append('municipality', $('#municipality').val());
                     formData.append('start_date', $('#start_date').val());
                     formData.append('user_id', $('#user_id').val());
                     console.log("project ", formData);
@@ -124,10 +137,8 @@
                         },
                         error: function (response) {
                             console.log("error",response);
-                            let message = error.response.message;
-                            let errors = error.response.errors;
-//                            var instance = M.Modal.getInstance(elem);
-//                            instance.close();
+                            let message = response.message;
+                            let errors = response.errors;
                             for (var error in   errors) {
                                 console.log("error",error)
                                 if( errors.hasOwnProperty(error) ) {

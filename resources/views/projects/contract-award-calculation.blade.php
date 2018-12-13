@@ -27,18 +27,17 @@
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="ec_district_area" type="text" class="validate">
+                                <input id="ec_district_area" type="text" value="{{$project->district}}" class="validate">
                                 <label for="ec_district_area">EC District Area</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="municipality" type="text" class="validate">
+                                <input id="municipality" type="text" value="{{$project->local_municipality}}" class="validate">
                                 <label for="municipality">Local Municipality</label>
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="input-field col m6 s12">
-                                <input id="ward" type="text" class="validate">
+                                <input id="ward" type="text" value="{{$project->ward}}" class="validate">
                                 <label for="ward">Ward</label>
                             </div>
                         </div>
@@ -63,28 +62,28 @@
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="contractor_name" type="text" class="validate">
+                                <input id="contractor_name" type="text" value="{{$project->contractors[0]->contractor_name}}" class="validate">
                                 <label for="contractor_name">Contractor Name</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="contractor_contact_person" type="text" class="validate">
-                                <label for="contractor_contact_person">Contractor Contact Person</label>
+                                <input id="contact_person" value="{{$project->contractors[0]->contact_person}}" type="text" class="validate">
+                                <label for="contact_person">Contractor Contact Person</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="contractor_manager_name" type="text" class="validate">
-                                <label for="contractor_manager_name">Contractor SME Manager Name</label>
+                                <input id="sme_manager_name" type="text" value="{{$project->contractors[0]->sme_manager_name}}"  class="validate">
+                                <label for="sme_manager_name">Contractor SME Manager Name</label>
                             </div>
+                        </div>
 
-                        </div>
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="landline" type="tel" class="validate">
+                                <input id="landline" type="tel" value="{{$project->contractors[0]->landline}}" class="validate">
                                 <label for="landline">Landline</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="mobile" type="tel" class="validate">
+                                <input id="mobile" type="tel" value="{{$project->contractors[0]->mobile}}" class="validate">
                                 <label for="mobile">Mobile</label>
                             </div>
                         </div>
@@ -95,7 +94,10 @@
                             <button class="btn waves-effect waves-light project-dashboard" style="margin-left:2em;"  name="">Back
                                 <i class="material-icons left">arrow_back</i>
                             </button>
-                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-socios" name="action">Save
+                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-contractor" name="action">Save
+                                <i class="material-icons right">send</i>
+                            </button>
+                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" hidden id="update-contractor" name="action">Update
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -109,31 +111,31 @@
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="name" type="text" value="{{$project->name}}" class="validate">
-                                <label for="name">Project/Facility Name</label>
+                                <input id="project_name" type="text" value="{{$project->name}}" class="validate">
+                                <label for="project_name">Project/Facility Name</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <textarea id="scope" type="text" class="materialize-textarea"></textarea>
-                                <label for="scope">Scope of Works</label>
+                                <textarea id="scope_of_work" type="text" class="materialize-textarea"></textarea>
+                                <label for="scope_of_work">Scope of Works</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="contract_sum_excl" type="number" class="validate">
+                                <input id="contract_sum_excl" type="number" step="0.01" class="validate">
                                 <label for="contract_sum_excl">Contract Sum Excl</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <textarea id="preliminary_general" class="materialize-textarea"></textarea>
-                                <label for="preliminary_general">Preliminary & General (R:)</label>
+                                <input id="preliminary_general" class="validate" step="0.01">
+                                <label for="preliminary_general">Preliminary & General (R)</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="contigency_allowable" type="number" class="validate">
+                                <input id="contigency_allowable" type="number" step="0.01" class="validate">
                                 <label for="contigency_allowable">Contigency Allowable</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <textarea id="socio_economic_allowables" class="materialize-textarea"></textarea>
+                                <input id="socio_economic_allowables" step="0.01" class="validate">
                                 <label for="socio_economic_allowables">Socio Economic Allowables</label>
                             </div>
                         </div>
@@ -145,7 +147,7 @@
                             <button class="btn waves-effect waves-light project-dashboard" style="margin-left:2em;" >Back
                                 <i class="material-icons left">arrow_back</i>
                             </button>
-                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-socios" name="action">Save
+                            <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-project-information" name="action">Save
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -272,6 +274,7 @@
                             <button class="btn waves-effect waves-light" style="margin-left:2em;margin-right: 2em;" id="save-socios" name="action">Save
                                 <i class="material-icons right">send</i>
                             </button>
+
                         </div>
                     </div>
 
@@ -282,10 +285,146 @@
     @push('custom-scripts-contract')
         <script>
             $(document).ready(function () {
+                let project = {!!$project!!};
+                if(project.contractors[0]){
+                    $('#update-contractor').show();
+                    $('#save-contractor').hide();
+                }else{
+                    $('#update-contractor').hide();
+                    $('#save-contractor').show();
+                }
+                console.log("Check project here",project);
+
                 $('.project-dashboard').on('click',function(){
 
                     let project_id = {!! '"'. $project->id.'"' !!};
                    window.location.href = '/projects/'+project_id;
+                });
+                $('#save-contractor').on('click',function(){
+                    let project_id = {!! '"'. $project->id.'"' !!};
+                    let formData = new FormData();
+                    formData.append('contractor_name', $('#contractor_name').val());
+                    formData.append('contact_person', $('#contact_person').val());
+                    formData.append('sme_manager_name', $('#sme_manager_name').val());
+                    formData.append('landline', $('#landline').val());
+                    formData.append('mobile', $('#mobile').val());
+                    formData.append('project_id', project_id);
+                    console.log("project ", formData);
+                    $.ajax({
+                        url: "{{ route('contractors.store') }}",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        type: 'post',
+
+                        success: function (response, a, b) {
+                            console.log("success",response);
+                            alert(response.message);
+                            $('#contractor_name').val(response.contractor.contractor_name);
+                            $('#contact_person').val(response.contractor.contact_person);
+                            $('#sme_manager_name').val(response.contractor.sme_manager_name);
+                            $('#landline').val(response.contractors.landline);
+                            $('#mobile').val(response.contractor.mobile);
+                        },
+                        error: function (response) {
+                            console.log("error",response);
+                            let message = response.message;
+                            let errors = response.errors;
+                            for (var error in   errors) {
+                                console.log("error",error)
+                                if( errors.hasOwnProperty(error) ) {
+                                    message += errors[error] + "\n";
+                                }
+                            }
+                            alert(message);
+                            $("#modal1").close();
+                        }
+                    });
+                });
+                $('#update-contractor').on('click',function(){
+                    let project_id = {!! '"'. $project->id.'"' !!};
+                    let formData = new FormData();
+                    formData.append('contractor_name', $('#contractor_name').val());
+                    formData.append('contact_person', $('#contact_person').val());
+                    formData.append('sme_manager_name', $('#sme_manager_name').val());
+                    formData.append('landline', $('#landline').val());
+                    formData.append('mobile', $('#mobile').val());
+                    formData.append('project_id', project_id);
+                    console.log("project ", formData);
+
+                    $.ajax({
+                        url: "{{ '/contractors/update-details/'.$project->contractors[0]->id }}",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        type: 'post',
+
+                        success: function (response, a, b) {
+                            console.log("success",response);
+                            alert(response.message);
+                            $('#contractor_name').val(contractor.contractor_name);
+                            $('#contact_person').val(contractor.contact_person);
+                            $('#sme_manager_name').val(contractor.sme_manager_name);
+                            $('#landline').val(contractor.landline);
+                            $('#mobile').val(contractor.mobile);
+                        },
+                        error: function (response) {
+                            console.log("error",response);
+                            let message = response.message;
+                            let errors = response.errors;
+                            for (var error in   errors) {
+                                console.log("error",error)
+                                if( errors.hasOwnProperty(error) ) {
+                                    message += errors[error] + "\n";
+                                }
+                            }
+                            alert(message);
+                            $("#modal1").close();
+                        }
+                    });
+                });
+                $('#save-project-information').on('click',function(){
+                    let project_id = {!! '"'. $project->id.'"' !!};
+                    let formData = new FormData();
+                    formData.append('name', $('#project_name').val());
+                    formData.append('scope_of_work', $('#scope_of_work').val());
+                    formData.append('contract_sum_excl', $('#contract_sum_excl').val());
+                    formData.append('preliminary_general', $('#preliminary_general').val());
+                    formData.append('contigency_allowable', $('#contigency_allowable').val());
+                    formData.append('socio_economic_allowables',$('#socio_economic_allowables').val());
+                    formData.append('project_id', project_id);
+                    console.log("project ", formData);
+                    $.ajax({
+                        url: "{{ url('projects/update/'.$project->id) }}",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        type: 'post',
+
+                        success: function (response, a, b) {
+                            console.log("success",response);
+                            alert(response.message);
+                            $('#project_name').val(response.project.name);
+                            $('#scope_of_work').val(response.project.scope_of_work);
+                            $('#contract_sum_excl').val(response.project.contract_sum_excl);
+                            $('#preliminary_general').val(response.project.preliminary_general);
+                            $('#contigency_allowable').val(response.project.contigency_allowable);
+                            $('#socio_economic_allowables').val(response.project.socio_economic_allowables);
+                        },
+                        error: function (response) {
+                            console.log("error",response);
+                            let message = response.message;
+                            let errors = response.errors;
+                            for (var error in   errors) {
+                                console.log("error",error)
+                                if( errors.hasOwnProperty(error) ) {
+                                    message += errors[error] + "\n";
+                                }
+                            }
+                            alert(message);
+                            $("#modal1").close();
+                        }
+                    });
                 });
             });
 //            initialiseStepper();

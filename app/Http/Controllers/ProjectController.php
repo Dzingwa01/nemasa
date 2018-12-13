@@ -30,7 +30,7 @@ class ProjectController extends Controller
     {
         $projects = Project::join('users','users.id','projects.user_id')
                 ->select('projects.*','users.name as assigned_to')
-                ->get();
+                ->get()->load('contractors');
         return Datatables::of($projects)->addColumn('action', function ($project) {
             $re = 'project/' . $project->id;
             $sh = 'projects/' . $project->id;
@@ -51,6 +51,8 @@ class ProjectController extends Controller
     }
 
     public function getContractAwardCalc(Project $project){
+        $project->load('contractors');
+
         return view('projects.contract-award-calculation',compact('project'));
     }
 
@@ -71,6 +73,7 @@ class ProjectController extends Controller
     }
 
     public function addSMEProcurementPlan(Project $project){
+
         return view('projects.add-sme-procurement',compact('project'));
     }
 
@@ -89,7 +92,7 @@ class ProjectController extends Controller
         $input = $request->validated();
         DB::beginTransaction();
         try{
-            $project = Project::create(['name'=>$input['name'],'location'=>$input['location'],'information'=>$input['information'],'start_date'=>$input['start_date'],'creator_id'=>Auth::user()->id,'user_id'=>$input['user_id']]);
+            $project = Project::create(['name'=>$input['name'],'ward'=>$input['ward'],'district'=>$input['district'],'local_municipality'=>$input['municipality'],'start_date'=>$input['start_date'],'creator_id'=>Auth::user()->id,'user_id'=>$input['user_id']]);
 
             DB::commit();
             return response()->json(['project'=>$project,'message'=>'Project created successfully'],200);
@@ -130,9 +133,19 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
         //
+        DB::beginTransaction();
+        try{
+            $project->update($request->all());
+            DB::commit();
+            return response()->json(['project'=>$project,'message'=>'Project updated successfully'],200);
+
+        }catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'Project could not be updated at the moment ' . $e->getMessage()], 400);
+        }
     }
 
     /**

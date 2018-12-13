@@ -26,6 +26,7 @@ Route::group(['middleware' => ['web']], function () {
      * Projects Controller
      */
     Route::resource('projects','ProjectController');
+    Route::post('projects/update/{project}','ProjectsController@update');
     Route::get('get-projects','ProjectController@getProjects')->name('get-projects');
     Route::get('project/delete/{project}','ProjectController@destroy');
     Route::get('contract-award-calculator/{project}','ProjectController@getContractAwardCalc');
@@ -35,6 +36,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('add-sme-procurement-plan/{project}','ProjectController@addSMEProcurementPlan');
     Route::get('add-local-procurement-plan/{project}','ProjectController@addLocalProcurementPlan');
     Route::get('add-specialist-procurement-plan/{project}','ProjectController@addSpecialistProcurementPlan');
+
+    /**
+     * Contractors
+     */
+    Route::resource('contractors','ContractorsController');
+    Route::post('contractors/update-details/{contractor}','ContractorsController@update');
+
     /**
      * Users Controller
      */
