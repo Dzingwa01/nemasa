@@ -136,7 +136,7 @@
                                 <label for="contigency_allowable">Contigency Allowable</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="socio_economic_allowables" type="number" value="{{$project->socio_economic_allowables}}" step="0.01" class="validate">
+                                <input id="socio_economic_allowables" type="number" value="{{$project->socio_economic_allowables}}" disabled step="0.01" class="validate">
                                 <label for="socio_economic_allowables">Socio Economic Allowables</label>
                             </div>
                         </div>
@@ -242,27 +242,31 @@
                         @csrf
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="work_budget" type="number" value="{{$project->work_budget}}" class="validate">
+                                <input id="work_budget" type="number" value="{{$project->work_budget}}" disabled class="validate">
                                 <label for="work_budget">Work Budget (R)</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="targeted_sme_participation_fee" value="{{$project->targeted_sme_participation_fee}}" type="number" class="validate">
+                                <input id="targeted_sme_participation_fee" value="30" type="number" disabled class="validate">
                                 <label for="targeted_sme_participation_fee">Target SME Participation in %</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="sme_package_value_target" type="number" value="{{$project->sme_package_value_target}}" class="validate">
+                                <input id="sme_package_value_target" type="number" value="{{$project->sme_package_value_target}}" disabled class="validate">
                                 <label for="sme_package_value_target">SME Package Value Target</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="targeted_procument_value" type="number" value="{{$project->targeted_procument_value}}" class="validate">
-                                <label for="targeted_procument_value">Targeted Procument Value (R)</label>
+                                <input id="targeted_procument_value" type="number" value="{{$project->targeted_procument_value}}" disabled class="validate">
+                                <label for="targeted_procument_value">Targeted Procument Value R</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m6 s12">
-                                <input id="local_procument_targeted_value" type="number" value="{{$project->local_procument_targeted_value}}" class="validate">
+                                <input id="local_procument_targeted_value" type="number" value="50" disabled class="validate">
+                                <label for="local_procument_targeted_value">Local Procument Targeted Value (%)</label>
+                            </div>
+                            <div class="input-field col m6 s12">
+                                <input id="local_procument_targeted_value" type="number" disabled value="{{$project->local_procument_targeted_value}}" class="validate">
                                 <label for="local_procument_targeted_value">Local Procument Targeted Value</label>
                             </div>
 
@@ -405,7 +409,7 @@
                     formData.append('contract_sum_excl', $('#contract_sum_excl').val());
                     formData.append('preliminary_general', $('#preliminary_general').val());
                     formData.append('contigency_allowable', $('#contigency_allowable').val());
-                    formData.append('socio_economic_allowables',$('#socio_economic_allowables').val());
+//                    formData.append('socio_economic_allowables',$('#socio_economic_allowables').val());
                     formData.append('project_id', project_id);
                     console.log("project ", formData);
                     $.ajax({
@@ -423,7 +427,7 @@
                             $('#contract_sum_excl').val(response.project.contract_sum_excl);
                             $('#preliminary_general').val(response.project.preliminary_general);
                             $('#contigency_allowable').val(response.project.contigency_allowable);
-                            $('#socio_economic_allowables').val(response.project.socio_economic_allowables);
+//                            $('#socio_economic_allowables').val(response.project.socio_economic_allowables);
 //                            $('#save-project-information').hide();
 //                            $('#update-project-information').show();
                         },

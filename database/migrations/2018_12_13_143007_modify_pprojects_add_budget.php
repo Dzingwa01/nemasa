@@ -15,11 +15,11 @@ class ModifyPprojectsAddBudget extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             //
-            $table->decimal('work_budget',15,2);
-            $table->decimal('targeted_sme_participation_fee',15,2);
-            $table->decimal('sme_package_value_target',15,2);
-            $table->decimal('targeted_procument_value',15,2);
-            $table->decimal('local_procument_targeted_value',15,2);
+            $table->decimal('work_budget',15,2)->default(0);
+            $table->decimal('targeted_sme_participation_fee',4,2)->default(30);
+            $table->decimal('sme_package_value_target',15,2)->default(0);
+            $table->decimal('targeted_procument_value',15,2)->default(0);
+            $table->decimal('local_procument_targeted_value',15,2)->default(0);
         });
     }
 

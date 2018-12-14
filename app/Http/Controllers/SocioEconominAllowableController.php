@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\SocioEconomicAllowable;
 use Illuminate\Http\Request;
 use DB;
@@ -43,6 +44,12 @@ class SocioEconominAllowableController extends Controller
         DB::beginTransaction();
         try{
             $socio = SocioEconomicAllowable::create($input);
+            $figures = array_sum(array_values($input));
+            $project = $socio->project;
+            $project->socio_economic_allowables = $figures;
+            $project->work_budget =  $project->contract_sum_excl - ($project->preliminary_general+$project->contigency_allowable+$project->socio_economic_allowables);
+            $project->save();
+            $project->save();
             DB::commit();
             return response()->json(['socio'=>$socio,'message'=>'Socio Economic Allowables created successfully'],200);
 
@@ -84,12 +91,18 @@ class SocioEconominAllowableController extends Controller
     public function update(Request $request, SocioEconomicAllowable $socio)
     {
         //
-        $input = $request->all();
+        $input = $request->input();
         DB::beginTransaction();
         try{
             $socio->update($input);
+            $figures = array_sum(array_values($input));
+            $project = $socio->project;
+            $project->socio_economic_allowables = $figures;
+            $project->work_budget =  $project->contract_sum_excl - ($project->preliminary_general+$project->contigency_allowable+$project->socio_economic_allowables);
+            $project->save();
+
             DB::commit();
-            return response()->json(['socio'=>$socio,'message'=>'Socio Economic Allowables updated successfully'],200);
+            return response()->json(['socio'=>$socio,'project'=>$project,'message'=>'Socio Economic Allowables updated successfully'],200);
 
         }catch (\Exception $e) {
             DB::rollback();

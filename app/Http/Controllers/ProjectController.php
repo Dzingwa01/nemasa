@@ -97,7 +97,7 @@ class ProjectController extends Controller
         $input = $request->validated();
         DB::beginTransaction();
         try{
-            $project = Project::create(['name'=>$input['name'],'ward'=>$input['ward'],'district'=>$input['district'],'local_municipality'=>$input['municipality'],'start_date'=>$input['start_date'],'creator_id'=>Auth::user()->id,'user_id'=>$input['user_id']]);
+            $project = Project::create(['client_name'=>$input['client_name'],'name'=>$input['name'],'ward'=>$input['ward'],'district'=>$input['district'],'local_municipality'=>$input['municipality'],'start_date'=>$input['start_date'],'creator_id'=>Auth::user()->id,'user_id'=>$input['user_id']]);
 
             DB::commit();
             return response()->json(['project'=>$project,'message'=>'Project created successfully'],200);
@@ -144,6 +144,11 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try{
             $project->update($request->all());
+            $project->work_budget =  $project->contract_sum_excl - ($project->preliminary_general+$project->contigency_allowable+$project->socio_economic_allowables);
+            $project->sme_package_value_target = ($project->targeted_sme_participation_fee/100)* $project->work_budget;
+            $project->targeted_procument_value = $project->work_budget - $project->sme_package_value_target;
+            $project->local_procument_targeted_value = (50/100)* $project->targeted_procument_value;
+            $project->save();
             DB::commit();
             return response()->json(['project'=>$project->load('contractors','socios'),'message'=>'Project information updated successfully'],200);
 

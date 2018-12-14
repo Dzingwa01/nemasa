@@ -19,7 +19,7 @@ class CreateSMEProcurementPlansTable extends Migration
             $table->string('package_number')->nullable();
             $table->text('package_description')->nullable();
             $table->integer('number_of_targetted_sms')->nullable();
-            $table->decimal('total_sme_package_est_budget',15,2)->nullable();
+            $table->decimal('total_sme_package_est_budget',15,2)->default(0);
             $table->string('cibd_grade')->nullable();
 
             $table->date('tender_date')->nullable();
