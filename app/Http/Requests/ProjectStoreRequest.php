@@ -30,6 +30,7 @@ class ProjectStoreRequest extends FormRequest
             'municipality'=>'required',
             'user_id'=>'required',
             'start_date'=>'nullable',
+            'client_name'=>'required'
         ];
     }
 }

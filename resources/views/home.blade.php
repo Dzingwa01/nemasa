@@ -11,6 +11,7 @@
             <table class="table table-bordered" style="width: 100%!important;" id="projects-table">
                 <thead>
                 <tr>
+                    <th>Client Name</th>
                     <th>Name</th>
                     <th>Ward</th>
                     <th>Municipality</th>
@@ -41,8 +42,15 @@
                         @csrf
                         <div class="row">
                             <div class="input-field col m6">
+                                <input id="client_name" type="text" class="validate">
+                                <label for="client_name">Client Name</label>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6">
                                 <input id="name" type="text" class="validate">
-                                <label for="name">Name</label>
+                                <label for="name">Project Name/Facility</label>
                             </div>
                             <div class="input-field col m6">
                                 <input id="ward" type="text" class="validate">
@@ -99,6 +107,7 @@
                         scrollX: 640,
                         ajax: '{{route('get-projects')}}',
                         columns: [
+                            {data:'client_name',name:'client_name'},
                             {data: 'name', name: 'name'},
                             {data: 'ward', name: 'ward'},
                             {data: 'local_municipality', name: 'local_municipality'},
@@ -114,6 +123,7 @@
                 });
                 $('#save-project').on('click',function(){
                     let formData = new FormData();
+                    formData.append('client_name',$('#client_name').val());
                     formData.append('name', $('#name').val());
                     formData.append('district', $('#district').val());
                     formData.append('ward', $('#ward').val());

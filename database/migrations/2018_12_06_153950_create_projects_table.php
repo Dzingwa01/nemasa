@@ -16,6 +16,7 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+            $table->string('client_name');
             $table->string('ward');
             $table->string('district');
             $table->text('local_municipality')->nullable();
