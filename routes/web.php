@@ -28,11 +28,29 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('socios','SocioEconominAllowableController');
     Route::post('socios/update-details/{socio}','SocioEconominAllowableController@update');
 
+    /*
+     * SpecialistProcurement Routes
+     */
+    Route::resource('specialist-proc','SpecialistProcurementController');
+    Route::post('specialist-proc/update-details/{specialist_proc}','SpecialistProcurementController@update');
+    Route::get('specialist-proc/delete/{specialist_proc}','SpecialistProcurementController@destroy');
+    Route::get('get-specialist-proc-packages/{project}','SpecialistProcurementController@getSpecialistProcurementPackages');
+
     /**
      * SMEProcurementPlanController
      */
     Route::resource('sme-proc','SMEProcurementPlanController');
     Route::post('sme-proc/update-details/{sme_proc}','SMEProcurementPlanController@update');
+    Route::get('get-sme-proc-packages/{project}','SMEProcurementPlanController@getPackages');
+    Route::get('sme-proc/delete/{sme_proc}','SMEProcurementPlanController@destroy');
+
+    /**
+     * LocalProcurementPlanController
+     */
+    Route::resource('local-proc','LocalProcurementController');
+    Route::post('local-proc/update-details/{local_proc}','LocalProcurementController@update');
+    Route::get('get-local-proc-packages/{project}','LocalProcurementController@getPackages');
+    Route::get('local-proc/delete/{local_proc}','LocalProcurementController@destroy');
 
     /**
      * Projects Controller

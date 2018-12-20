@@ -55,7 +55,18 @@
             <div class="col s12 m4">
                 <div class="card blue-grey darken-1 hoverable">
                     <div class="card-content white-text">
-                        <span class="card-title" style="font-weight: bolder;text-align: center;">SME Progress Report</span>
+                        <span class="card-title" style="font-weight: bolder;text-align: center;">Specialist Progress Report</span>
+
+                    </div>
+                    <div class="card-action">
+                        <a style="margin-left: 40%" href="#">Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="card blue-grey darken-1 hoverable">
+                    <div class="card-content white-text">
+                        <span class="card-title" style="font-weight: bolder;text-align: center;">Local Procurement Progress Report</span>
 
                     </div>
                     <div class="card-action">

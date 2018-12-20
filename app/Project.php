@@ -21,4 +21,11 @@ class Project extends BaseModel
     public function sme_procs(){
         return $this->hasMany(SMEProcurementPlan::class);
     }
+    public function local_procs(){
+        return $this->hasMany(LocalProcumentPlan::class);
+    }
+
+    public function specialist_procs(){
+        return $this->hasMany(SpecialistProcurement::class);
+    }
 }

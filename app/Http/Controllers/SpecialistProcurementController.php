@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Project;
-use App\SMEProcurementPlan;
+use App\SpecialistProcurement;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 
-class SMEProcurementPlanController extends Controller
+class SpecialistProcurementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,17 +21,18 @@ class SMEProcurementPlanController extends Controller
         //
     }
 
-    public function getPackages(Project $project){
-        $sme_procs = $project->sme_procs()->get();
+    public function getSpecialistProcurementPackages(Project $project){
+        $specialist_procs = $project->specialist_procs()->get();
 
-        return Datatables::of($sme_procs)->addColumn('action', function ($sme_proc) {
-            $re = '/sme-proc/' . $sme_proc->id;
-            $sh = '/sme-proc/' . $sme_proc->id;
-            $del = '/sme-proc/delete/' . $sme_proc->id;
-            return '<a href=' . $sh . '><i class="material-icons " title="View SME Package" style="color:green">visibility</i></a><a href=' . $del . ' title="Delete SME Package" style="color:red"><i class="material-icons">delete_forever</i></a>';
+        return Datatables::of($specialist_procs)->addColumn('action', function ($specialist_proc) {
+            $re = '/specialist-proc/' . $specialist_proc->id;
+            $sh = '/specialist-proc/' . $specialist_proc->id;
+            $del = '/specialist-proc/delete/' . $specialist_proc->id;
+            return '<a href=' . $sh . '><i class="material-icons " title="View Specialist Procurement Package" style="color:green">visibility</i></a><a href=' . $del . ' title="Delete Specialist Procurement Package" style="color:red"><i class="material-icons">delete_forever</i></a>';
         })
             ->make(true);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -54,13 +55,13 @@ class SMEProcurementPlanController extends Controller
         $input = $request->all();
         DB::beginTransaction();
         try{
-            $sme_proc = SMEProcurementPlan::create($input);
+            $specialist_proc = SpecialistProcurement::create($input);
             DB::commit();
-            return response()->json(['sme_proc'=>$sme_proc,'message'=>'SME Procument package information created successfully'],200);
+            return response()->json(['specialist_proc'=>$specialist_proc,'message'=>'Specialist Procument package information created successfully'],200);
 
         }catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'SME Procument package information could not be saved at the moment ' . $e->getMessage()], 400);
+            return response()->json(['message' => 'Specialist Procument package information could not be saved at the moment ' . $e->getMessage()], 400);
         }
     }
 
@@ -70,11 +71,12 @@ class SMEProcurementPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SMEProcurementPlan $sme_proc)
+    public function show(SpecialistProcurement $specialist_proc)
     {
         //
-        $project = $sme_proc->project;
-        return view('projects.add-sme-procurement',compact('project','sme_proc'));
+        $project = $specialist_proc->project;
+
+        return view('projects.add-specialist-procurement-plan',compact('project','specialist_proc'));
     }
 
     /**
@@ -95,19 +97,19 @@ class SMEProcurementPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SMEProcurementPlan $sme_proc)
+    public function update(Request $request, SpecialistProcurement $specialist_proc)
     {
         //
         $input = $request->all();
         DB::beginTransaction();
         try{
-            $sme_proc->update($input);
+            $specialist_proc->update($input);
             DB::commit();
-            return response()->json(['sme_proc'=>$sme_proc,'message'=>'SME Procument package information updated successfully'],200);
+            return response()->json(['specialist_proc'=>$specialist_proc,'message'=>'Specialist Procument package information updated successfully'],200);
 
         }catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'SME Procument package information could not be updated at the moment ' . $e->getMessage()], 400);
+            return response()->json(['message' => 'Specialist Procument package information could not be updated at the moment ' . $e->getMessage()], 400);
         }
     }
 
@@ -117,18 +119,18 @@ class SMEProcurementPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SMEProcurementPlan $sme_proc)
+    public function destroy(SpecialistProcurement $specialist_proc)
     {
         //
         DB::beginTransaction();
-        try{
-            $sme_proc->delete();
+        try {
+            $specialist_proc->delete();
             DB::commit();
             return redirect()->back();
-        }catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             DB::rollback();
             return redirect()->back();
         }
-
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectStoreRequest;
+use App\LocalProcumentPlan;
 use App\Project;
+use App\SMEProcurementPlan;
+use App\SpecialistProcurement;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -63,12 +66,15 @@ class ProjectController extends Controller
 
     public function addLocalProcurementPlan(Project $project){
         $project->load('contractors','socios');
-        return view('projects.add-local-procurement',compact('project'));
+        $local_proc = new LocalProcumentPlan();
+        return view('projects.add-local-procurement',compact('project','local_proc'));
     }
 
     public function getSpecialistProcurementPlan(Project $project){
         $project->load('contractors','socios');
-        return view('projects.specialist-procurement-plan',compact('project'));
+        $specialist_proc = new SpecialistProcurement();
+//        dd($specialist_proc);
+        return view('projects.specialist-procurement-plan',compact('project','specialist_proc'));
     }
 
     public function getLocalProcurementPlan(Project $project){
@@ -78,12 +84,14 @@ class ProjectController extends Controller
 
     public function addSMEProcurementPlan(Project $project){
         $project->load('contractors','socios');
-        return view('projects.add-sme-procurement',compact('project'));
+        $sme_proc = new SMEProcurementPlan();
+        return view('projects.add-sme-procurement',compact('project','sme_proc'));
     }
 
     public function addSpecialistProcurementPlan(Project $project){
         $project->load('contractors','socios');
-        return view('projects.add-specialist-procurement-plan',compact('project'));
+        $specialist_proc = new SpecialistProcurement();
+        return view('projects.add-specialist-procurement-plan',compact('project','specialist_proc'));
     }
     /**
      * Store a newly created resource in storage.

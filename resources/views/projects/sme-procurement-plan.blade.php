@@ -19,7 +19,7 @@
                                 <tbody>
                                 <tr>
                                     <td>Client/Sponsor</td>
-                                    <td></td>
+                                    <td>{{$project->client_name}}</td>
                                 </tr>
                                 <tr>
                                     <td>Project /Facility Name</td>
@@ -27,15 +27,15 @@
                                 </tr>
                                 <tr>
                                     <td>Main Contractor Name</td>
-                                    <td>{{$project->contractors[0]->contractor_name}}</td>
+                                    <td>{{!empty($project->contractors[0])?$project->contractors[0]->contractor_name:''}}</td>
                                 </tr>
                                 <tr>
                                     <td>Present Contract Value</td>
-                                    <td></td>
+                                    <td>{{'R '.$project->contract_sum_excl}}</td>
                                 </tr>
                                 <tr>
                                     <td>Works Excl Contigencies & Socio</td>
-                                    <td>{{'R '.$project->contract_sum_excl}}</td>
+                                    <td>{{'R '.$project->work_budget}}</td>
                                 </tr>
                                 <tr><td></td><td></td></tr>
                                 </tbody>
@@ -48,7 +48,6 @@
                     <div class="card hoverable">
                         <div class="card-content white-text">
                             <table class="striped">
-
                                 <tbody>
                                 <tr>
                                     <td>Total Contract Value</td>
@@ -93,15 +92,15 @@
                                 </tr>
                                 <tr>
                                     <td>SME Procurement Plan Date</td>
-                                    <td></td>
+                                    <td>{{\Carbon\Carbon::today()->toDateString()}}</td>
                                 </tr>
                                 <tr>
                                     <td>SME Target %</td>
-                                    <td></td>
+                                    <td>30%</td>
                                 </tr>
                                 <tr>
                                     <td>SME Targeted Value</td>
-                                    <td></td>
+                                    <td>{{'R '.$project->sme_package_value_target}}</td>
                                 </tr>
                                 <tr>
                                     <td>SME Award % Achieved</td>
@@ -116,7 +115,7 @@
                 </div>
             </div>
         <div class="row" style="margin-left: 2em;margin-right: 2em;margin-bottom: 2em;">
-            <div class="col s12">
+            <div class="col s12" style="margin-bottom: 3em;">
                 <table class="table table-bordered" style="width: 100%!important;" id="packages-table">
                     <thead>
                     <tr>
@@ -140,11 +139,31 @@
         @push('custom-scripts-contract')
             <script>
                 $(document).ready(function () {
+                    let project_id = {!! '"'. $project->id.'"' !!};
                     $('.project-dashboard').on('click',function(){
                         let project_id = {!! '"'. $project->id.'"' !!};
                         window.location.href = '/projects/'+project_id;
                     });
                     $('select[name="packages-table_length"]').css("display","inline");
+                    $(function () {
+                        let url ='/get-sme-proc-packages/'+project_id;
+                        $('#packages-table').DataTable({
+                            processing: true,
+                            serverSide: true,
+                            paging: true,
+                            responsive: true,
+                            scrollX: 640,
+                            ajax: url,
+                            columns: [
+                                {data:'package_number',name:'package_number'},
+                                {data: 'package_description', name: 'package_description'},
+                                {data: 'cibd_grade', name: 'cibd_grade'},
+                                {data: 'number_of_targetted_sms', name: 'number_of_targetted_sms'},
+                                {data: 'action', name: 'action', orderable: false, searchable: false}
+                            ]
+                        });
+                        $('select[name="packages-table_length"]').css("display","inline");
+                    });
                 });
 
                 function initialiseStepper(){

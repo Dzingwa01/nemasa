@@ -160,6 +160,13 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="/js/jquery-step-maker.js"></script>
 <script>
+    let options = {
+        format:'yyyy-mm-dd'
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, options);
+    });
     $(document).ready(function () {
         console.log("initializing");
         $('input.autocomplete').autocomplete({
@@ -169,9 +176,13 @@
                 "Google": 'https://placehold.it/250x250'
             },
         });
-        M.AutoInit();
+//        M.AutoInit();
+        $('.sidenav').sidenav();
         $(".dropdown-trigger").dropdown();
         $('select').formSelect();
+        $('.carousel').carousel();
+        $('.tabs').tabs();
+        $('.modal').modal();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

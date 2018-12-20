@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\LocalProcumentPlan;
 use App\Project;
-use App\SMEProcurementPlan;
+use App\SpecialistProcurement;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 
-class SMEProcurementPlanController extends Controller
+class LocalProcurementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,16 +23,17 @@ class SMEProcurementPlanController extends Controller
     }
 
     public function getPackages(Project $project){
-        $sme_procs = $project->sme_procs()->get();
+        $local_procs = $project->local_procs()->get();
 
-        return Datatables::of($sme_procs)->addColumn('action', function ($sme_proc) {
-            $re = '/sme-proc/' . $sme_proc->id;
-            $sh = '/sme-proc/' . $sme_proc->id;
-            $del = '/sme-proc/delete/' . $sme_proc->id;
-            return '<a href=' . $sh . '><i class="material-icons " title="View SME Package" style="color:green">visibility</i></a><a href=' . $del . ' title="Delete SME Package" style="color:red"><i class="material-icons">delete_forever</i></a>';
+        return Datatables::of($local_procs)->addColumn('action', function ($local_proc) {
+            $re = '/local-proc/' . $local_proc->id;
+            $sh = '/local-proc/' . $local_proc->id;
+            $del = '/local-proc/delete/' . $local_proc->id;
+            return '<a href=' . $sh . '><i class="material-icons " title="View Local Procurement Package" style="color:green">visibility</i></a><a href=' . $del . ' title="Delete Local Procurement Package" style="color:red"><i class="material-icons">delete_forever</i></a>';
         })
             ->make(true);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -54,13 +56,13 @@ class SMEProcurementPlanController extends Controller
         $input = $request->all();
         DB::beginTransaction();
         try{
-            $sme_proc = SMEProcurementPlan::create($input);
+            $local_proc = LocalProcumentPlan::create($input);
             DB::commit();
-            return response()->json(['sme_proc'=>$sme_proc,'message'=>'SME Procument package information created successfully'],200);
+            return response()->json(['local_proc'=>$local_proc,'message'=>'Local Procument package information created successfully'],200);
 
         }catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'SME Procument package information could not be saved at the moment ' . $e->getMessage()], 400);
+            return response()->json(['message' => 'Local Procument package information could not be saved at the moment ' . $e->getMessage()], 400);
         }
     }
 
@@ -70,11 +72,12 @@ class SMEProcurementPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SMEProcurementPlan $sme_proc)
+    public function show(LocalProcumentPlan $local_proc)
     {
         //
-        $project = $sme_proc->project;
-        return view('projects.add-sme-procurement',compact('project','sme_proc'));
+        $project = $local_proc->project;
+
+        return view('projects.add-local-procurement',compact('project','local_proc'));
     }
 
     /**
@@ -95,19 +98,19 @@ class SMEProcurementPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SMEProcurementPlan $sme_proc)
+    public function update(Request $request, LocalProcumentPlan $local_proc)
     {
         //
         $input = $request->all();
         DB::beginTransaction();
         try{
-            $sme_proc->update($input);
+            $local_proc->update($input);
             DB::commit();
-            return response()->json(['sme_proc'=>$sme_proc,'message'=>'SME Procument package information updated successfully'],200);
+            return response()->json(['local_proc'=>$local_proc,'message'=>'Local Procument package information updated successfully'],200);
 
         }catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'SME Procument package information could not be updated at the moment ' . $e->getMessage()], 400);
+            return response()->json(['message' => 'Local Procument package information could not be updated at the moment ' . $e->getMessage()], 400);
         }
     }
 
@@ -117,18 +120,19 @@ class SMEProcurementPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SMEProcurementPlan $sme_proc)
+    public function destroy(LocalProcumentPlan $local_proc)
     {
         //
         DB::beginTransaction();
-        try{
-            $sme_proc->delete();
+        try {
+            $local_proc->delete();
             DB::commit();
             return redirect()->back();
-        }catch (\Exception $e) {
-            DB::rollback();
+        }
+        catch (\Exception $e) {
+                DB::rollback();
+            DB::commit();
             return redirect()->back();
         }
-
     }
 }
