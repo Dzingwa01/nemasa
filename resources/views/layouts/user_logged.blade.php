@@ -176,7 +176,7 @@
                 "Google": 'https://placehold.it/250x250'
             },
         });
-//        M.AutoInit();
+        M.AutoInit();
         $('.sidenav').sidenav();
         $(".dropdown-trigger").dropdown();
         $('select').formSelect();
